@@ -1,0 +1,74 @@
+Java is 
+	Simple  (Easy to learn)
+	Secure (Programs run within the JVM )
+	Multithreaded (Write programs that does many things simultaneously)
+	Platform independent (Java program can be executed on any kind of machine. Write Once Run Anywhere) 
+	High Level (Write code in human understandable format like english words)
+	Object Oriented (follows object oriented programming model which helps to break the complex code into objects)
+	Distributed 
+programming language.
+
+Language -> It is the medium of communication.
+Program -> It is a set of instructions for a device to perform some specific task.
+Programming Language -> It contains set of grammatical rules or syntax to write a program for instructing machine to perform specific tasks.
+
+High Level (Write code in human understandable format like english words)
+Platform independent (Java program can be executed on any kind of machine. Write Once Run Anywhere) 
+
+Setup Development Environment and Validate:
+-------------------------------------------
+One Time Task
+1) Downloading Java
+2) Installing Java / Unzip Downloaded File
+	C:\Program Files\jdk-15.0.1
+		bin
+			javac
+			java
+	JAVA_HOME = C:\Program Files\jdk-15.0.1
+
+3) Setting Path in Environment Variable
+	Open My Computer/ (This PC)
+	Right Click on blank space and select Properties
+	Click on Advanced System Properties from Left Panel
+	It will open System Properties
+	Under Advanced Tab Click on Environment Variable Button
+	Add/Edit new Environment Variable under User Variables
+		Variable Name: PATH
+		Variable Value: C:\Program Files\jdk-15.0.1\bin
+	Close all opened window by selecting OK.
+	
+
+For Application:
+
+4) Write a program
+a) Open Some Text Editor
+b) Write the program
+class Test{
+public static void main(String args[]){
+System.out.println("Hello Guys, Welcome to my World");
+}
+}	
+		
+c) Save the file with the name "Test.java" in D:\CODE\JAVA
+	D:\CODE\JAVA -> Workspace
+Workspace (Place of your file system where project related files are stored)
+
+5) Compile the program
+a) Open Command Prompt
+b) Change the location to workspace
+	cd /d D:\CODE\JAVA
+c) Compile Java Source code using Java compiler
+	javac <sourceFileNameWithExt>
+	javac Test.java
+
+6) Execute/Run your Application
+	java <classFileNameWithoutExt>
+	java Test
+
+
+Setting Path on Command Prompt:
+SET PATH="C:\Program Files\jdk-15.0.1\bin"	
+	-> Replace existing value with new value
+
+SET PATH=%PATH%;"C:\Program Files\jdk-15.0.1\bin"
+	-> Append new value with existing value

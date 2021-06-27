@@ -1,0 +1,114 @@
+StringBuffer and StringBuilder class
+------------------------------------
+It is a class in java.lang package which holds the string values (sequence of characters).
+
+It is mutable object. the data of the object can be modified.
+
+We have capacity concept with these class object. It is to ensure that we have enough memory to story some n number of character.
+
+StringBuilder sb = new StringBuilder();
+	Length = 0
+	Capacity = 16
+
+StringBuilder sb = new StringBuilder("ABC");
+	Length = 3
+	Capacity = 19
+
+capacity will increase as we add more data to the object and if the new size is more than the current capacity and less than newCapacity. 
+  newCapacity = (currentCapacity + 1) * 2
+
+Methods of StringBuffer are synchronized which means the object of StringBuffer are thread-safe. In multi-thread environment, only one thread can use the one object to perform any task.
+
+Methods of StringBuilder are not synchronized which means the object of StringBuilder are not thread-safe. In multi-thread environment, multiple threads can use the same object to perform any task.
+
+---
+public class Test{
+public static void main(String[] args){
+StringBuilder sb = new StringBuilder(12);
+sb.append("ABCD1234");
+System.out.println(sb);
+System.out.println(sb.length());
+System.out.println(sb.capacity());
+
+sb.trimToSize();
+System.out.println(sb);
+System.out.println(sb.length());
+System.out.println(sb.capacity());
+sb.ensureCapacity(25);
+System.out.println(sb);
+System.out.println(sb.length());
+System.out.println(sb.capacity());
+
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+------
+public class Test{
+public static void main(String[] args){
+StringBuffer sb = new StringBuffer(12);
+System.out.println(sb);
+System.out.println(sb.length());
+System.out.println(sb.capacity());
+
+sb.append("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789");
+
+System.out.println(sb);
+System.out.println(sb.length());
+System.out.println(sb.capacity());
+
+sb.ensureCapacity(2147482640);
+
+System.out.println(sb.length());
+System.out.println(sb.capacity());
+}
+}
+---
+
+public class Test{
+public static void main(String[] args){
+StringBuffer sb = new StringBuffer(12);
+
+for(int i=0;i<2147483647; i++) {
+ sb.append("A");
+System.out.println("adding "+i);
+}
+System.out.println(sb);
+
+for(int i=0;i<500; i++) {
+ sb.append("B");
+System.out.println("adding "+i);
+}
+
+System.out.println(sb);
+
+}
+}
+

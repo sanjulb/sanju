@@ -1,0 +1,326 @@
+Interface:
+==========
+Interface is a special class which is by default abstract.
+It is fully abstract means 
+	methods are public abstract 
+	variable are public static final.
+
+In Java, interface keyword is used to define Interface.
+We can achieve multiple inheritance using interface.
+
+One interface can extend another interface(s).
+One interface can not extend any class.
+
+One class can implement multiple interfaces.
+
+interface In1{ }
+interface In2 { }
+interface In3 extends In1, In2{ }
+
+
+class A { }
+
+interface In4 extends A{ } // Invalid
+
+class B extends A implements In1, In2 { }
+
+
+We can define reference variable for the interface but can not create object.
+We can not define Initialization blocks, constructor, Intance variable in the interface.
+
+public class Test{
+public static void main(String[] args) {
+A ref1 = null;
+//ref1 = new A();
+
+In1 iRef = null;
+iRef = new In1();
+
+}
+}
+
+interface In1{ }
+
+abstract class A{ }
+
+---- INVALID -----
+interface In1{
+In1(){}
+{
+System.out.println("I Block");
+}
+static{
+System.out.println("S Block");
+}
+}
+
+Static memory will be allocated only once and all the sub class will be using the same memory for same JVM.
+
+public class Test{
+public static void main(String[] args) {
+
+System.out.println(A.data);
+System.out.println(B.data);
+System.out.println(C.data);
+A.data = 90;
+System.out.println(A.data);
+System.out.println(B.data);
+System.out.println(C.data);
+
+B.data = 80;
+System.out.println(A.data);
+System.out.println(B.data);
+System.out.println(C.data);
+
+C.data = 70;
+System.out.println(A.data);
+System.out.println(B.data);
+System.out.println(C.data);
+}
+}
+
+class A {
+static int data = 12;
+}
+
+class B extends A { }
+
+class C extends A { }
+
+
+-------
+
+public class Test{
+public static void main(String[] args) {
+System.out.println(In1.X);
+In1.X = 90;
+}
+}
+interface In1 {
+int X = 10; 
+// public static final int X = 10;
+}
+
+
+-----
+By default methods of the interface are public and abstract.
+From Java 8 onwards, you can define 
+	default method (method with default keyword with implementation)
+	static method (method with static keyword with implementation)
+
+public class Test{
+public static void main(String[] args) {
+In1.m3();
+//In1.m4();
+
+B ref = new B();
+ref.m4();
+ref.m2();
+}
+}
+
+interface In1 {
+// void m1() { }
+void m2();
+	// public abstract void m2();
+
+static void m3() {
+System.out.println("-- In1.m3() Static");
+}
+default void m4(){
+System.out.println("-- In1.m4() default");
+}
+}
+
+abstract class A implements In1 { }
+
+class B implements In1 {
+public void m2(){
+System.out.println("-- B-> m2()");
+}
+}
+
+----- Default method is imtroduced so that if new method is added in the interface, it will not give any issue for the existing class.
+
+public class Test{
+public static void main(String[] args) {
+
+}
+}
+
+interface In1 {
+ void m1();
+ void m2();
+ default void m3() {}
+}
+
+class A implements In1{
+public void m1(){}
+public void m2(){}
+}
+
+class B implements In1{
+public void m1(){}
+public void m2(){}
+}
+
+
+class C implements In1{
+public void m1(){}
+public void m2(){}
+}
+
+class D implements In1{
+public void m1(){}
+public void m2(){}
+}
+
+
+-----
+public class Test{
+public static void main(String[] args) {
+
+}
+}
+interface In1{
+void m1();
+void m2();
+}
+interface In2{
+void m1();
+void m3();
+}
+
+
+class X implements In1, In2 {
+public void m2(){
+System.out.println("X-> m2");
+}
+public void m1(){
+System.out.println("X-> m1");
+}
+public void m3(){
+System.out.println("X-> m3");
+}
+}
+
+class A {
+public void m1(){
+System.out.println("A-> m1");
+}
+}
+
+class Y extends A implements In1, In2 {
+public void m2(){
+System.out.println("X-> m2");
+}
+public void m3(){
+System.out.println("X-> m3");
+}
+}
+
+
+------ Type Casting ---
+public class Test{
+public static void main(String[] args) {
+
+int x = 19;
+long data = x; 
+//int y = data;
+int m = (int)data;
+
+In1 ref1 = new B(); 
+//B ref = ref1;
+B obj = (B)ref1;
+
+C cobj = (C)ref1; // ClassCastException
+}
+}
+
+interface In1 { }
+
+class A { }
+
+class B implements In1{ }
+
+class C implements In1{ }
+
+----- instanceof ----
+instanceof is keyword in java. It is used to validate whether reference variable is holding object of specific type or not.
+	<refVarName> instanceof <className/interfaceName>
+It return boolean.
+ When reference variable is holding object of specific type then it return true.
+ When reference variable is not holding object of specific type then it return false.
+
+public class Test{
+public static void main(String[] args) {
+
+In1 iRef = null;
+System.out.println(iRef instanceof B);
+System.out.println(iRef instanceof C);
+System.out.println(iRef instanceof Object);
+System.out.println(iRef instanceof In1);
+
+iRef = new B();
+System.out.println("-----");
+System.out.println(iRef instanceof B);
+System.out.println(iRef instanceof C);
+System.out.println(iRef instanceof Object);
+System.out.println(iRef instanceof In1);
+
+iRef = new C();
+System.out.println("-----");
+System.out.println(iRef instanceof B);
+System.out.println(iRef instanceof C);
+System.out.println(iRef instanceof Object);
+System.out.println(iRef instanceof In1);
+
+}
+}
+
+interface In1 { }
+
+class A { }
+ // class A extends java.lang.Object { }
+
+class B implements In1{ }
+ // class B extends java.lang.Object implements In1{ }
+
+class C implements In1{ }
+ // class C extends java.lang.Object implements In1{ }
+
+class D extends A{ }
+ // class D extends A{ }
+
+
+For any class in java, by default java.lang.Object is the super type.
+When you are not extending any class then Object will be direct super class otherwise Object will indirect super class.
+-------
+public class Test{
+public static void main(String[] args) {
+
+In1 [] arr = new In1[3];
+// arr[0] = new In1();
+arr[0] = new B();
+arr[1] = new C();
+arr[2] = new B();
+
+// arr[2] = new A();
+
+}
+}
+
+interface In1 { }
+
+class A { }
+ // class A extends java.lang.Object { }
+
+class B implements In1{ }
+ // class B extends java.lang.Object implements In1{ }
+
+class C implements In1{ }
+ // class C extends java.lang.Object implements In1{ }
+
+class D extends A{ }
+ // class D extends A{ }
+

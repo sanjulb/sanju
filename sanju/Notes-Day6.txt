@@ -1,0 +1,511 @@
+Control Statement
+-----------------	
+ Used to control the execution flow of other statements.
+
+1) Conditional Control Control
+	if
+	switch
+2) Looping Statement
+	for
+	while
+	do-while
+3) Unconditional Control Statement
+	break
+	continue
+
+Conditional Control Control
+---------------------------
+	Select statement/ Decision Making
+
+Make a decision	-> Some condition (operators/methods/variable that gives you a boolean value)	Possible value of boolean is true / false
+	ST1
+	ST2
+	ST3
+
+	ST4
+	ST5
+	ST6
+
+1) if statement
+
+
+Simple If:
+----------- 
+Executes the if block only when the condition/boolean value is true or else it will not execute.
+
+if (<condition that gives you boolean>) {
+	// statements
+	// if block / true block
+}
+
+
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+int time = 11; // 24 Hours;
+if(time < 12){
+ System.out.println("Good Morning");
+ // Statements
+}
+System.out.println("Thanks");
+}
+}
+
+if - else:
+----------- 
+Executes the if block only when the condition/boolean value is true.
+When condition/boolean value is false then it executed the else statement.
+
+if (<condition that gives you boolean>) {
+	// statements
+	// if block / true block
+} else {
+	// statements
+	// else block / false block
+}
+
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+int time = 11; // 24 Hours;
+if(time < 12){
+  System.out.println("Good Morning");
+  // Statements
+} else {
+  System.out.println("Good Evening");
+}
+System.out.println("Thanks");
+}
+}
+
+Example:
+class Test{
+public static void main(String args[]){
+
+System.out.println("Welcome");
+
+int time = -25; // 24 Hours;
+if(time >= 0 && time < 12){
+  System.out.println("Good Morning");
+  // Statements
+} else {
+  if (time == 12) {
+    System.out.println("Good Noon");
+  }else {
+     if(time > 12 && time < 17) {
+       System.out.println("Good Afternoon");
+     }else{
+       if(time >= 17 && time < 21) {
+        System.out.println("Good Evening");
+       } else {
+         if(time >= 21 && time < 24) {
+           System.out.println("Good Night");
+         } else {
+           System.out.println("Invalid Time");
+         }
+       }   
+     }
+  }
+}
+
+System.out.println("Thanks");
+
+}
+}
+
+
+if - else-if:
+It will match the condition from first to last. 
+It will execute only one block which condition is matching and after that control will be moved to after the if else-if.
+
+
+class Test{
+public static void main(String args[]){
+
+System.out.println("Welcome");
+
+int time = 25; // 24 Hours;
+if(time >= 0 && time < 12){
+  System.out.println("Good Morning");
+  // Statements
+} else if (time == 12) {
+  System.out.println("Good Noon");
+}else if(time > 12 && time < 17) {
+  System.out.println("Good Afternoon");
+}else if(time >= 17 && time < 21) {
+  System.out.println("Good Evening");
+}else if(time >= 21 && time < 24) {
+  System.out.println("Good Night");
+} else {
+  System.out.println("Invalid Time");
+}
+
+System.out.println("Thanks");
+
+}
+}
+
+
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+int value = 0;
+if(value == 0) {
+  System.out.println("Zero");
+} else if (value < 1) {
+  System.out.println("Zero Again");
+} else if (value < 2) {
+  System.out.println("Zero Last");
+}
+
+System.out.println("Thanks");
+}
+}
+
+Nested if
+
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+int value = 1;
+
+if(value >= 0) {
+  if (value <= 2) { // Nested
+    System.out.println("Matching");
+  }
+}
+
+if(value >= 0 && value <= 2) {
+  System.out.println("Matching Again");
+}
+System.out.println("Thanks");
+}
+}
+
+
+Note:
+
+{ 
+... Block (Collection/Group of statements)
+}
+
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+
+int value = 2;
+
+if (value == 0)
+{ // Block is Group of Statement
+    System.out.println("Hello1");
+    System.out.println("Hello2");
+    System.out.println("Hello3");
+}
+
+if (value == 0)
+  System.out.println("Hai1"); // if block
+  System.out.println("Hai2");
+  System.out.println("Hai3");
+
+if (value == 0){
+  System.out.println("Hai11"); // if block
+}
+  System.out.println("Hai21");
+  System.out.println("Hai31");
+
+System.out.println("Thanks");
+}
+}
+
+
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+int x = 10;
+if (true) {
+ int y = 20;
+ System.out.println(x);
+ System.out.println(y);
+}
+System.out.println(x);
+// System.out.println(y);
+System.out.println("Thanks");
+}
+}	
+
+2) Switch
+----------
+switch (value/var) {
+ case <value1>:
+    // Statements
+    [break;]
+ case <value2>:
+    // Statements
+    [break;]
+ case <value3>:
+    // Statements
+    [break;]
+ ...
+ default:
+    // Statements
+      
+}
+
+the type of value/var must be 
+	byte
+	short
+	int
+	char
+enum can used from java 5.
+String can used from java 7.
+
+value provided and the case value must be assignment compatible.
+Case value must be constant and must not be duolicate
+
+
+With if else-if
+You can use various data type
+various operators can be used 
+Only one block (matching block) will be executed
+
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+int value = 0;
+if (value == 0) {
+  System.out.println("Zero");  
+} else if (value == 1) {
+  System.out.println("One");  
+} else if (value == 2) {
+  System.out.println("Two");  
+} else if (value == 3) {
+  System.out.println("Three");  
+} else if (value == 4) {
+  System.out.println("Four");  
+} else if (value == 5) {
+  System.out.println("Five");  
+} else {
+   System.out.println("Invalid");  
+}
+
+System.out.println("Thanks");
+
+}
+}
+
+
+
+With Switch:
+Try to match the value with case.
+When matching case found, that is the starting point of execution of switch
+Continue the execution of statement until break is found or end of switch.
+
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+int value = 7;
+switch(value) {
+ case 0:
+  System.out.println("Zero");  
+  break;
+ case 1:
+  System.out.println("One");  
+  break;
+ case 2:
+  System.out.println("Two");  
+  break;
+ case 3:
+  System.out.println("Three");  
+  break;
+ case 4:
+  System.out.println("Four");  
+  break;
+ case 5:
+  System.out.println("Five");  
+  break;
+ default:
+   System.out.println("Invalid");  
+}
+
+System.out.println("Thanks");
+
+}
+}
+
+
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+int value = 3;
+switch(value) {
+ case 0:
+  System.out.println("Zero");  
+  break;
+ case 1:
+  System.out.println("One");  
+  
+ case 2:
+  System.out.println("Two");  
+ 
+ case 3:
+  System.out.println("Three");  
+ 
+ case 4:
+  System.out.println("Four");  
+ 
+ case 5:
+  System.out.println("Five");  
+ 
+ default:
+   System.out.println("Invalid");  
+}
+System.out.println("Thanks");
+}
+}
+
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+String str = "WELCOME";
+switch(str) {
+ case "HELLO":
+  System.out.println("Hello Guys");  
+  break;
+ case "WELCOME":
+  System.out.println("Welcome Guys");  
+  break;
+ default:
+   System.out.println("Not Matched");  
+}
+
+System.out.println("Thanks");
+
+}
+}
+
+
+Looping / Iteration Control Statement
+-------------------------------------
+Used to execute some block multiple times depending on condition.
+
+
+while Statement
+----------------
+Entry controlled loop.
+
+<initializationOfCounterVariable>
+while (<condition>) {
+  // Block
+  // <updationOfCounterVariable>
+}
+
+for Statement
+----------------
+
+for (<initializationOfCounterVariable>; <condition>; <updationOfCounterVariable>) {
+  // Block
+}
+
+
+<initializationOfCounterVariable>
+for ( ; <condition>; <updationOfCounterVariable>) {
+  // Block
+}
+
+
+<initializationOfCounterVariable>
+for ( ; <condition>; ) {
+  // Block
+  // <updationOfCounterVariable>
+}
+
+
+<initializationOfCounterVariable>
+for ( ; ; ) {
+  // Block
+  // <condition> break;
+  // <updationOfCounterVariable>
+}
+
+
+do while Statement
+----------------
+Exit controlled loop.
+
+<initializationOfCounterVariable>
+do {
+  // Block 
+  // <updationOfCounterVariable>
+} while (<condition>);
+
+
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+
+int n = 2;
+
+System.out.println(n * 1);
+System.out.println(n * 2);
+System.out.println(n * 3);
+System.out.println(n * 4);
+System.out.println(n * 5);
+System.out.println(n * 6);
+System.out.println(n * 7);
+System.out.println(n * 8);
+System.out.println(n * 9);
+System.out.println(n * 10);
+
+
+System.out.println("While Loop");
+int count = 1;
+while (count <=10)
+{
+System.out.println(n * count);
+count++;
+}
+
+System.out.println("For Loop");
+for (int c = 1; c <=10; c++ )
+{
+System.out.println(n * c);
+}
+
+System.out.println("For Loop");
+int x = 1;
+for ( ; x <=10; x++ )
+{
+System.out.println(n * x);
+}
+
+System.out.println("For Loop");
+int a = 1;
+for ( ; a <=10;  )
+{
+System.out.println(n * a);
+a = a + 1;
+}
+
+System.out.println("For Loop");
+int b = 12;
+for ( ; ;  )
+{
+if(b >10)
+  break;
+System.out.println(n * b);
+b = b + 1;
+}
+
+System.out.println("do while");
+int c1 = 12;
+do{
+System.out.println(n * c1);
+c1++;
+}while (c1 <=10);
+
+System.out.println("Thanks");
+}
+}
+
+
+

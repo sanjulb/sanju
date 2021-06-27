@@ -1,0 +1,498 @@
+Method
+------
+-> Refers operation / behavior of the object.
+-> May required the data to perform the operation.
+	When method does not required the data then no need to deifine parameter.
+	When method requires the data 
+		May use Class level variable
+		May define as patameter.
+		 -> While invoking the method you must provide values for parameter.
+
+-> May return the result back after performing the operation.
+-> Defining return type for the method is required.
+class Hello {
+show(int ab, int bc){
+System.out.println("-- show --");
+int sum = ab + bc;
+System.out.println("Sum of "+ab+" and "+bc+" is "+ sum);
+}
+-> use void if your method does not returns any value.
+class Hello {
+void show(int ab, int bc){
+System.out.println("-- show --");
+int sum = ab + bc;
+System.out.println("Sum of "+ab+" and "+bc+" is "+ sum);
+}
+
+-> use dataType as returnType when your method returns any value.
+-> Must use return statement followed by value inside the body.
+
+class Hello {
+int show(int ab, int bc){
+System.out.println("-- show --");
+int sum = ab + bc;
+System.out.println("Sum of "+ab+" and "+bc+" is "+ sum);
+}
+
+class Hello {
+int show(int ab, int bc){
+System.out.println("-- show --");
+int sum = ab + bc;
+return sum;
+}
+
+
+Method can be of two types depends on Scope
+	-> Instance (Non Static) Method	
+	   -> Defined without static
+	   -> Must be called with object
+	   -> Can not be called using null reference 		          
+           -> NullPointerException when try to call with null ref
+	   -> Can not be called using Class name
+	   -> Can use instance as well as static variable of class
+
+	-> Static Method
+	   -> Defined with static
+	   -> Must be called with Class Name
+	   -> Can be called using null reference 		          
+	   -> Can be called using Object
+	   -> Can use only static variable of class
+
+Method can be of two types depends on parameter
+	-> No Argument  (Without Parameter)
+		<retType> <methodName> () {
+		  // Block
+		}
+
+		-> .<methodName>();
+	-> Argumented (With Parameter)
+		<retType> <methodName> (<paramList/FormalArguments>) {
+		  // Block
+		}
+
+		-> .<methodName>(); // Invalid
+		-> .<methodName>(<actualValues/ActualArguments>);
+
+
+
+class Test{
+public static void main(String[] args){
+System.out.println("-- Hello --");
+Hello h1 = new Hello(12,23);
+h1.show();
+h1.display();
+// h1.process();
+h1.process(30, 40);
+h1.ab = 100;
+h1.bc = 200;
+h1.show();
+h1.display();
+h1.process(50, 60);
+
+System.out.println("\n-- Hai --");
+Hai.ab = 12;
+Hai.bc = 23;
+Hai.show();
+Hai.display();
+Hai.process(30, 40);
+Hai.ab = 100;
+Hai.bc = 200;
+Hai.show();
+Hai.display();
+Hai.process(50, 60);
+}
+}
+
+
+
+class Hello {
+int ab;
+int bc;
+Hello (int ab, int bc) {
+ this.ab = ab;
+ this.bc = bc;
+}
+
+void show(){
+System.out.println("-- show --");
+System.out.println("Sum of 10 and 20 is 30");
+}
+
+void display(){
+System.out.println("-- display --");
+int sum = ab + bc;
+System.out.println("Sum of "+ ab + " and "+ bc +" is "+sum);
+}
+
+void process(int ab, int bc){
+System.out.println("-- process --");
+int sum = ab + bc;
+System.out.println("Sum of "+ ab + " and "+ bc +" is "+sum);
+}
+
+}
+
+class Hai {
+static int ab;
+static int bc;
+static void show(){
+System.out.println("-- show --");
+System.out.println("Sum of 10 and 20 is 30");
+}
+
+static void display(){
+System.out.println("-- display --");
+int sum = ab + bc;
+System.out.println("Sum of "+ ab + " and "+ bc +" is "+sum);
+}
+
+static void process(int ab, int bc){
+System.out.println("-- process --");
+int sum = ab + bc;
+System.out.println("Sum of "+ ab + " and "+ bc +" is "+sum);
+}
+
+}
+-------
+
+class Test{
+public static void main(String[] args){
+Hello h = new Hello();
+h.show(10, 20);
+
+int res = h.show(30, 40);
+System.out.println("Result is "+res);
+
+System.out.println(h.show(50, 60));
+}
+}
+
+class Hello {
+int show(int ab, int bc){
+System.out.println("-- show --");
+int sum = ab + bc;
+System.out.println("Sum of "+ab+" and "+bc+" is "+ sum);
+return sum;
+}
+}
+
+-> You can return same or lower type value from the method using return statement.
+
+int show(int ab, int bc){
+System.out.println("-- show --");
+return 'A';
+}
+
+
+int show(int ab, int bc){
+System.out.println("-- show --");
+return 12L;
+}
+
+long display(){
+System.out.println("-- display--");
+return 12;
+}
+long display(){
+System.out.println("-- display--");
+return 'A';
+}
+long display(){
+System.out.println("-- display--");
+return 123L;
+}
+long display(){
+System.out.println("-- display--");
+return 12.45F;
+}
+long display(){
+System.out.println("-- display--");
+return 12.45;
+}
+
+Method Overoading
+------------------
+Process of defining multiple method with the same name in the class.
+-> Parameters must be different.
+ 	-> Type of parameter
+	-> Number of parameter
+	-> Order of parameter
+
+-> Return type can be same or different.
+
+// Invalid
+class Service {
+void search() {
+System.out.println("Searching by default option");
+}
+String search() {
+System.out.println("Searching by id");
+}
+}
+
+class Test{
+public static void main(String[] args){
+
+Service s1 = new Service ();
+s1.search();
+// s1.search(12.23F);
+// s1.search(12.23);
+s1.search('A');
+s1.search(23);
+s1.search(123L);
+s1.search("BLR");
+
+s1.search(1234L, "BLR");
+s1.search("Aadi", 1234L);
+
+}
+}
+
+class Service {
+void search() {
+System.out.println("Searching by default option");
+}
+void search(int id) {
+System.out.println("Searching by id");
+}
+void search(long phone) {
+System.out.println("Searching by phone");
+}
+void search(String city) {
+System.out.println("Searching by city");
+}
+/*
+void search(String name) {
+System.out.println("Searching by name");
+}
+*/
+void search(long phone, String city) {
+System.out.println("Searching by phone and city");
+}
+void search(String name, long phone) {
+System.out.println("Searching by name and phone");
+}
+}
+
+/*
+char-> int -> long -> float -> double
+byte-> short -> int -> long -> float -> double
+*/
+
+Some issue:
+-----------
+class Test{
+public static void main(String[] args){
+A aref = null;
+B bref = null;
+Service s1 = new Service();
+s1.process(aref);
+s1.process(bref);
+//s1.process(null);
+}
+}
+class Service {
+void process(A ref) {
+System.out.println("-- process(A) --");
+}
+void process(B ref) {
+System.out.println("-- process(B) --");
+}
+}
+
+class A{}
+class B{}
+
+
+Call by Value 
+=============
+-> invoke a method by passing primitive.
+-> Copies the values to method patameter (local variable)
+-> Changes made inside the method then it will not reflect outside the method
+
+Call by Reference 
+=================
+-> invoke a method by passing reference.
+-> Copies the reference of object to method patameter (local variable)
+-> Changes made for reference itself inside the method will not reflect outside the method
+-> Changes made for object data inside the method will reflect outside the method
+
+
+class Test{
+public static void main(String[] args){
+Service s1 = new Service();
+int xy = 12;
+System.out.println("-in main Before "+xy);
+s1.modify(xy);
+System.out.println("-in main After "+xy);
+}
+}
+
+class Service {
+void modify(int ab) {
+  System.out.println("-- modify (int)--");
+  System.out.println("Initial "+ab);
+  ab = ab + 10;
+  System.out.println("After "+ab);
+}
+}
+
+class Hello {
+  int ab;
+}
+
+-----
+
+class Test{
+public static void main(String[] args){
+Service s1 = new Service();
+Hello h1 = new Hello();
+h1.ab = 12;
+System.out.println("-in main Before "+h1.ab);
+s1.modify(h1);
+System.out.println("-in main After "+h1.ab);
+}
+}
+
+class Service {
+void modify(Hello h) {
+  System.out.println("-- modify (Hello)--");
+  System.out.println("Initial "+h.ab);
+  h = new Hello();
+  h.ab = 90;
+  System.out.println("After modified "+h.ab);
+}
+}
+
+class Hello {
+  int ab;
+}
+
+----
+class Test{
+public static void main(String[] args){
+Service s1 = new Service();
+Hello h1 = new Hello();
+h1.ab = 12;
+System.out.println("-in main Before "+h1.ab);
+s1.modify(h1);
+System.out.println("-in main After "+h1.ab);
+}
+}
+
+class Service {
+void modify(Hello h) {
+  System.out.println("-- modify (Hello)--");
+  System.out.println("Initial "+h.ab);
+  h.ab = 90;
+  System.out.println("After modified "+h.ab);
+}
+}
+
+class Hello {
+  int ab;
+}
+
+---
+class Test{
+public static void main(String[] args){
+
+int xy = 10;
+int ab = xy;
+System.out.println(xy +"\t"+ab);
+ab = ab + 10;
+System.out.println(xy +"\t"+ab);
+
+
+Hello h1 = new Hello();
+h1.ab = 10;
+Hello h = h1;
+System.out.println(h1.ab +"\t"+h.ab);
+h = new Hello();
+h.ab = h.ab + 90;
+System.out.println(h1.ab +"\t"+h.ab);
+
+
+Hello h2 = h1;
+System.out.println(h1.ab +"\t"+h2.ab);
+h2.ab = h2.ab + 90;
+System.out.println(h1.ab +"\t"+h2.ab);
+}
+}
+
+
+class Hello {
+  int ab;
+}
+
+
+Var Args (Variable Arguments)
+-----------------------------
+-> Addedd from Java 5
+-> used to define method/constructor parameter
+-> <dataType>... <varName>
+-> Treat this as array inside the method/constructor
+-> You can pass multiple values / array argument 
+-> Only one parameter can be defined as var-args
+-> Var-args must be the last parameter.
+
+
+class Test{
+public static void main(String[] args){
+Hello h1 = new Hello();
+//h1.show();
+//h1.show(12);
+h1.show(20, 30);
+//h1.show(12,23,34);
+//h1.show(10,20,30,40);
+
+h1.display(new int[]{10,20,30,40});
+h1.display(new int[]{10,20});
+
+// h1.display(10,20);
+// h1.display(10,20, 30, 40);
+
+
+h1.process(new int[]{10,20,30,40});
+h1.process(new int[]{10,20});
+h1.process();
+h1.process(10);
+h1.process(10,20);
+h1.process(10,20, 30, 40);
+h1.process(10,20, 30, 40, 50, 60);
+}
+}
+
+
+class Hello {
+  // int... ab;
+  
+  void show(int ab, int bc){
+    System.out.println(ab+"\t"+bc);
+  } 
+
+  void display(int[] arr){
+    System.out.println("-- array --");
+    for(int data : arr) {
+    System.out.println(data);
+    }
+  } 
+  
+   void process(int... arr){
+    System.out.println("-- var args --");
+    for(int data : arr) {
+    System.out.println(data);
+    }
+  } 
+
+}
+
+
+
+
+
+
+
+
+
+

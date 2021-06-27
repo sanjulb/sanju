@@ -1,0 +1,376 @@
+Packages
+--------
+ to group the related classes or interfaces together.
+
+Custom Package
+    Packages defined by developer for their own purpose.
+Pre defined Package / Built-in Package
+    Packages defined and provided by java vendor.
+	java.lang
+	java.lang.reflect
+	java.util
+	java.io
+	java.sql
+	etc
+
+java.lang
+	This is built-in package.
+	No need to have import statement to use classes or inerfaces defined in java.lang.
+	By default all the classes or interfaces from java.lang is imported.
+
+	Object	
+
+	String
+	StringBuffer
+	StringBuilder
+
+	Boolean
+	Byte
+	Character
+	Short
+	Integer
+	Long
+	Float
+	Double
+	
+	Exception
+	RuntimeException
+	Error
+	
+	Thread
+	ThreadGroup
+	
+	Class	
+	
+	Cloneable
+	Comparable
+	AutoCloseable
+	Runnnable
+	etc
+
+Object
+------
+Object is a class in java.lang package and it is super class for any class defined in java.
+It can be direct or indirect super class.
+There is no super class for object.
+When you are writing class without extending any other class then object will be direct super class.
+When you are writing class by extending other class then object will be indirect super class.
+Members of Object class can be accessed with any object.
+
+
+javap java.lang.Object
+
+
+public class java.lang.Object {
+  public final native java.lang.Class<?> getClass();
+  public native int hashCode();
+  public boolean equals(java.lang.Object);
+  public java.lang.String toString();
+  protected native java.lang.Object clone() throws java.lang.CloneNotSupportedException;
+
+
+  public final native void notify();
+  public final native void notifyAll();
+  public final void wait() throws java.lang.InterruptedException;
+  public final native void wait(long) throws java.lang.InterruptedException;
+  public final void wait(long, int) throws java.lang.InterruptedException;
+  protected void finalize() throws java.lang.Throwable;
+}
+
+native means method signature is defined in java language but implementation is defined in non java language (C or C++ language).
+
+getClass():
+-----------
+  When JVM loads the class (Reads the class information from .class file and stores into the memory), the class details will be stored into the memory. 
+  One default object will be created of type java.lang.Class which holds the loaded class information.
+  getClass() returns the same default object using that you can get the information about a class.
+  getClass is final method so can not be overriden,.     
+
+
+public class Test{
+public static void main(String[] args) throws Exception{
+Student st = new Student();
+System.out.println("Delete all the class file and Press Enter");
+System.in.read();
+Class cl = st.getClass();
+
+System.out.println(cl.getName());
+System.out.println(cl.getSuperclass());
+Class arr[]= cl.getInterfaces();
+
+for(Class in : arr) {
+System.out.println(in.getName());
+}
+
+}
+}
+
+class Person { }
+interface In1{ }
+interface In2{ }
+class Student extends Person implements In1, In2{ }
+
+
+hashCode():
+-----------
+This is native method. 
+Defualt implemenation is to generate some unique integer value with the help of object address which means, if the hascode is same then both reference are pointing same object.
+
+Using this integer value, you can identify object uniquely.
+
+public class Test{
+public static void main(String[] args) throws Exception{
+Student st1 = new Student(12);
+Student st2 = new Student(13);
+Student st3 = new Student(12);
+Student st4 = st1;
+
+System.out.println(st1.hashCode());
+System.out.println(st2.hashCode());
+System.out.println(st3.hashCode());
+System.out.println(st4.hashCode());
+
+System.out.println(st1 == st2);
+System.out.println(st1 == st3);
+System.out.println(st1 == st4);
+
+}
+}
+
+class Student{
+ int sid;
+ Student(int sid){
+   this.sid = sid;
+ }
+}
+
+
+We can override hashCode() in our class to provide the custom implementation.
+
+public class Test{
+public static void main(String[] args) throws Exception{
+Student st1 = new Student(12);
+Student st2 = new Student(13);
+Student st3 = new Student(12);
+Student st4 = st1;
+
+System.out.println(st1.hashCode());
+System.out.println(st2.hashCode());
+System.out.println(st3.hashCode());
+System.out.println(st4.hashCode());
+
+System.out.println(st1 == st2);
+System.out.println(st1 == st3);
+System.out.println(st1 == st4);
+
+}
+}
+
+class Student{
+ int sid;
+ Student(int sid){
+   this.sid = sid;
+ }
+ public int hashCode(){
+   return this.sid;
+ }
+}
+
+
+equals():
+----------
+It is used to compare whether two objects are same or not.
+
+You can compare object using address or using data.
+
+Default implementation of equals method is to compare the address means when two referece is pointing to same object then only this method returns true other wise it will return false.
+
+public class Test{
+public static void main(String[] args) throws Exception{
+Student st1 = new Student(12);
+Student st2 = new Student(13);
+Student st3 = new Student(12);
+Student st4 = st1;
+
+System.out.println("-- equals --");
+System.out.println(st1.equals(st2));
+System.out.println(st1.equals(st3));
+System.out.println(st1.equals(st4));
+
+System.out.println("-- == --");
+System.out.println(st1 == st2);
+System.out.println(st1 == st3);
+System.out.println(st1 == st4);
+
+}
+}
+
+class Student{
+ int sid;
+ Student(int sid){
+   this.sid = sid;
+ }
+}
+
+
+
+We can override equals() in our class to provide the custom implementation to compare data.
+public class Test{
+public static void main(String[] args) throws Exception{
+Student st1 = new Student(12);
+Student st2 = new Student(13);
+Student st3 = new Student(12);
+Student st4 = st1;
+
+System.out.println("-- equals --");
+System.out.println(st1.equals(st2));
+System.out.println(st1.equals(st3));
+System.out.println(st1.equals(st4));
+
+System.out.println("-- == --");
+System.out.println(st1 == st2);
+System.out.println(st1 == st3);
+System.out.println(st1 == st4);
+
+}
+}
+
+class Student{
+ int sid;
+ Student(int sid){
+   this.sid = sid;
+ }
+ 
+ public boolean equals(Object obj) {
+  if (this == obj) 
+     return true;
+  else if (obj instanceof Student){
+     Student st = (Student) obj;
+     return this.sid == st.sid;
+  }
+  return false;
+ }
+}
+
+
+
+----- using hashCode and equals -----
+import java.util.*;
+
+public class Test{
+public static void main(String[] args) throws Exception{
+
+Set<Student> set = new HashSet<Student>();
+Student st = new Student(88);
+set.add(st);
+set.add(st);
+set.add(st);
+set.add(st);
+set.add(new Student(88));
+set.add(new Student(88));
+set.add(new Student(88));
+set.add(new Student(88));
+
+set.add(new Student(77));
+set.add(new Student(77));
+set.add(new Student(77));
+set.add(new Student(77));
+set.add(new Student(77));
+set.add(new Student(77));
+
+System.out.println(set.size());
+for(Student stu : set) {
+System.out.println(stu.sid);
+}
+
+}
+}
+
+class Student{
+ int sid;
+ Student(int sid){
+   this.sid = sid;
+ }
+ 
+ public int hashCode(){
+   return this.sid;
+ }
+
+ public boolean equals(Object obj) {
+  if (this == obj) 
+     return true;
+  else if (obj instanceof Student){
+     Student st = (Student) obj;
+     return this.sid == st.sid;
+  }
+  return false;
+ }
+
+}
+
+
+toString():
+------------
+It returns the String value which id String representation of object.
+The default implementation is to return 
+	<fullyQualifiedClassName>@<hexaDecimalOfHashCode>
+
+
+public class Test{
+public static void main(String[] args){
+Student stu = new Student(23);
+System.out.println(stu);
+System.out.println(stu.toString());
+String str = "A";
+str = str + stu;
+System.out.println(str);
+
+
+String cName = stu.getClass().getName();
+int hashCode = stu.hashCode();
+String hex = Integer.toHexString(hashCode);
+String msg = cName+"@"+hex;
+
+System.out.println(msg);
+
+}
+}
+
+class Student{
+ int sid;
+ Student(int sid){
+   this.sid = sid;
+ }
+}
+
+
+We can override toString() in our class to provide the custom implementation to represent data as object's string representation.
+
+
+public class Test{
+public static void main(String[] args){
+Student stu = new Student(23, "Aadi");
+System.out.println(stu);
+System.out.println(stu.toString());
+String str = "A";
+str = str + stu;
+System.out.println(str);
+
+}
+}
+
+class Student{
+ int sid;
+ String name;
+ Student(int sid, String name){
+   this.sid = sid;
+   this.name = name;
+ }
+ public String toString(){
+   return this.sid+"\t"+this.name;
+ }
+}
+
+Cloning / clone()
+-------------------
+

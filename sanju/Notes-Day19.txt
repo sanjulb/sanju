@@ -1,0 +1,330 @@
+String class
+------------
+It is a class in java.lang package.
+It is a final class. 
+In implements the below important interface
+	java.io.Serializable
+	java.lang.Comparable
+	java.lang.CharSequence
+equals method from object is overriden in String class to compare the data with case. To compare String data by ignoring you can use equalsIgnoreCase().
+
+hashCode() is override in String class and generates the hashcode using the ASCII value of data.
+
+toString() is overriden which is returning the data of String object.
+
+public class Test{
+public static void main(String[] args){
+
+String s1 = new String("a");
+String s2 = new String("A");
+
+System.out.println(s1 == s2);
+System.out.println(s1.equals(s2));
+
+System.out.println(s1.hashCode());
+System.out.println(s2.hashCode());
+
+System.out.println(s1.toString());
+System.out.println(s2.toString());
+
+System.out.println(s1);
+System.out.println(s2);
+
+}
+}
+
+String object can be created in two ways:
+1) Without new operator (Without Constructor)
+2) With new operator (With Constructor)
+
+
+1) Without new operator (Without Constructor)
+----------------------------------------------
+
+a) JVM will allocate 8 byte of memory for the reference variable
+a) JVM will verify whether String literal is present in the constant pool or not.
+ -> if not prenent then new String literal will be created in the literal pool and that reference will be assigned to reference variable.
+ -> if prenent then the same reference will be assigned to reference variable.  It will not create another object.
+
+
+public class Test{
+public static void main(String[] args){
+
+String s1 = "ABC";
+String s2 = "ABC";
+String s21 = "A"+"BC";
+String s22 = "AB"+"C";
+String s22 = "A"+"B"+"C";
+String s3 = "XYZ";
+String s4 = "XYZ";
+
+System.out.println(s1);
+System.out.println(s2);
+
+System.out.println(s1 == s2);
+System.out.println(s1.equals(s2));
+System.out.println(s1 == new Student().sname);
+System.out.println(s1 == new Student().sname);
+System.out.println(s1 == new Employee().ename);
+System.out.println(s1 == new Employee().ename);
+
+System.out.println(s3);
+System.out.println(s4);
+
+System.out.println(s3 == s4);
+System.out.println(s3.equals(s4));
+
+}
+}
+
+class Student{
+ String sname = "ABC";
+}
+
+class Employee {
+ String ename = "ABC";
+ 
+}
+
+
+
+
+2) With new operator (With Constructor)
+
+a) JVM will allocate 8 byte of memory for the reference variable
+a) JVM will verify whether String literal is present in the constant pool or not.
+ -> if not prenent then new String literal will be created in the literal pool.
+
+Since you are using new Operator with constructor, so the new String object will be created outside the constant pool and that reference will be assigned to reference variable.
+
+public class Test{
+public static void main(String[] args){
+
+String s1 = new String("ABC");
+String s2 = new String("ABC");
+String s3 = new String("XYZ");
+String s4 = new String("XYZ");
+
+System.out.println(s1);
+System.out.println(s2);
+
+System.out.println(s1 == s2);
+System.out.println(s1.equals(s2));
+System.out.println(s1 == new Student().sname);
+System.out.println(s1 == new Student().sname);
+System.out.println(s1 == new Employee().ename);
+System.out.println(s1 == new Employee().ename);
+System.out.println(s3);
+System.out.println(s4);
+System.out.println(s3 == s4);
+System.out.println(s3.equals(s4));
+}
+}
+
+class Student{
+ String sname = new String("ABC");
+}
+
+class Employee {
+ String ename = new String("ABC");
+}
+
+
+intern() search the oject from constant pool and return that reference.(always reference from constant pool).
+
+public class Test{
+public static void main(String[] args){
+
+String s1 = new String("ABC");
+String s2 = new String("ABC");
+System.out.println(s1);
+System.out.println(s2);
+System.out.println(s1 == s2);
+System.out.println(s1.equals(s2));
+
+String s3 = s1.intern();
+String s4 = "ABC";
+System.out.println(s3);
+System.out.println(s4);
+System.out.println(s3 == s4);
+System.out.println(s3.equals(s3));
+
+}
+}
+
+
+String objects are immutable means once object is created the data of the object can not be modified.
+
+public class Test{
+public static void main(String[] args){
+
+Student st1 = new Student(12);
+Student st2 = st1;
+System.out.println(st1+"\t"+st2);
+
+//st1.sid = 34;
+System.out.println(st1+"\t"+st2);
+st1 = new Student(23);
+System.out.println(st1+"\t"+st2);
+
+String str1 = "ABC";
+String str2 = "ABC";
+System.out.println(str1+"\t"+str2);
+str1 = "XYZ";
+System.out.println(str1+"\t"+str2);
+
+}
+}
+
+final class Student{ 
+  final int sid;
+  Student(int sid) {
+   this.sid = sid;
+  }
+  public String toString(){
+    return ""+this.sid;   
+  }
+}
+
+
+public class Test{
+public static void main(String[] args){
+
+String s1 = "";
+System.out.println(s1.isEmpty());
+System.out.println(s1.length());
+
+String s2 = "ABC";
+System.out.println(s2.isEmpty());
+System.out.println(s2.length());
+
+for(int i=0; i < s2.length(); i++) {
+ char ch = s2.charAt(i);
+ System.out.println(i+"\t"+ch);
+}
+}
+}
+
+----------
+public class Test{
+public static void main(String[] args){
+String str = "ABCBACBDRBRTS";
+System.out.println(firstOccurance(str, 'B'));
+System.out.println(firstOccurance(str, 'C'));
+System.out.println(firstOccurance(str, 'X'));
+
+System.out.println(str.indexOf('B'));
+System.out.println(str.indexOf('C'));
+System.out.println(str.indexOf('X'));
+
+System.out.println(firstOccurance(str, 'B'));
+System.out.println(firstOccurance(str, 'B',2));
+System.out.println(firstOccurance(str, 'B',4));
+System.out.println(firstOccurance(str, 'B',7));
+System.out.println(firstOccurance(str, 'B',10));
+
+System.out.println(str.indexOf('B'));
+System.out.println(str.indexOf('B', 2));
+System.out.println(str.indexOf('B', 4));
+System.out.println(str.indexOf('B', 7));
+System.out.println(str.indexOf('B', 10));
+
+
+System.out.println(str.lastIndexOf('B'));
+System.out.println(str.lastIndexOf('B', 8));
+System.out.println(str.lastIndexOf('B', 5));
+System.out.println(str.lastIndexOf('B', 2));
+System.out.println(str.lastIndexOf('B', 0));
+
+}
+
+static int firstOccurance(String str,  char ch){
+for(int i=0; i < str.length(); i++) {
+ char ch1 = str.charAt(i);
+ if  (ch1 == ch)
+    return i;  
+}
+return -1;
+}
+
+static int firstOccurance(String str,  char ch, int fromIndex){
+for(int i=fromIndex; i < str.length(); i++) {
+ char ch1 = str.charAt(i);
+ if  (ch1 == ch)
+    return i;  
+}
+return -1;
+}
+}
+
+
+
+---
+public class Test{
+public static void main(String[] args){
+String str = "NHFGTRABJHNGCBACBDRBRTS";
+char ch = 'B';
+int count = 0;
+
+for(int i = 0;i < str.length(); i++) {
+ char temp = str.charAt(i);
+ if (ch == temp) {
+   count++;
+ }
+}
+System.out.println(count);
+
+System.out.println("-----");
+int count1 = 0;
+for(int i = 0;i < str.length(); i++) {
+ int index = str.indexOf(ch, i);
+  if(index == -1) {
+   break;
+  }
+ i = index;
+ count1++;
+}
+System.out.println(count1);
+
+}
+}
+
+-----
+public class Test{
+public static void main(String[] args){
+String str = "Java Hi Java Guys, Welcome to Java world. Java is programming language. You should Learn Java. Write logic in Java language Java";
+
+System.out.println("-----");
+int count = 0;
+for(int i = 0;i < str.length(); i++) {
+ int index = str.indexOf("Java", i);
+  if(index == -1) {
+   break;
+  }
+ i = index;
+ count++;
+}
+System.out.println(count);
+String arr[] = str.split("Java");
+System.out.println("Size "+arr.length);
+for(String ar : arr){
+System.out.println(ar);
+}
+}
+}
+
+----
+public class Test{
+public static void main(String[] args){
+String sr = "abcDef";
+System.out.println(sr.toUpperCase());
+System.out.println(sr.toLowerCase());
+System.out.println(sr.concat("heLLo"));
+System.out.println(sr);
+int a = 123;
+//String s = a;
+String s1=String.valueOf(a);
+System.out.println(s1);
+}
+}
+

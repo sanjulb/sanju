@@ -1,0 +1,413 @@
+﻿Basic Data type
+	int, long float etc
+
+Reference Data Type
+	
+String Literals:
+----------------
+	Collection of characters
+	Zero or more characters.
+	Used for String type variable.
+	Must be inside double quotes.	
+
+	String s1;	s1 -> 8 byte
+			s1  -> null
+	
+	
+	s1 = "ABCD";
+
+class Test{
+public static void main(String args[]){
+String s1;
+s1 = "";
+System.out.println(s1);
+s1 = "ABCD65";
+System.out.println(s1);
+
+s1 = "D:\new\test";
+System.out.println(s1);
+s1 = "D:\\new\\test";
+System.out.println(s1);
+}
+}
+
+
+class Test{
+public static void main(String args[]){
+String s1 = "ABCD";
+System.out.println(s1.length());
+s1 = "";
+System.out.println(s1.length());
+s1 = null;
+System.out.println(s1);
+System.out.println(s1.length());
+}
+}
+
+
+
+Integral Literals
+-----------------
+ Can be stored in byte, short, int and long
+ Default type is int
+ To represent long type value you need to add L suffix.
+	
+Decimal Format
+	Base 10
+	10 unique digits are used	
+	0 to 9
+	Must not start with 0	
+
+	123
+	987
+	45678675
+	01234	-> Not decimal. It is octal	
+	0876	-> Not Decimal. It is not valid
+
+Octal Format
+	Base 8
+	8 unique digits are used	
+	0 to 7
+	Can't use 8 and 9 in octal	
+	Must start with 0
+
+	0123
+	0876 ->Considered as octal. It is not valid value
+
+Hexadecimal Format:
+	Base 16
+	16 unique characters are used
+	0 to 9 and A/a - F/f
+	A = 10, B = 11, C = 12, D = 13, E = 14, F = 15
+	Must start with 0x / 0X
+
+	12-> Decimal
+	0x12 -> Hexa Decimal 
+	A -> Invalid
+	0xA -> Valid Hexadecimal
+
+Binary Format (From Java 7)
+	Base 2
+	2 digits are used
+	0 and 1
+	Must start with 0b / 0B
+
+
+	
+
+	10 -> Decimal
+	012 -> Octal
+	0xA -> Hexadecimal
+	0b1010	-> Binary
+
+
+class Test{
+public static void main(String args[]){
+int x = 12345;
+System.out.println(x);
+x = 9;
+System.out.println(x);
+// x = 09;
+
+x = 012;
+System.out.println(x);
+System.out.println(x + 22);
+
+// x = A;
+x = 0xA;
+System.out.println(x);
+
+x = 0xF;
+System.out.println(x);
+
+x = 10;
+System.out.println(x);
+
+x = 0b10;
+System.out.println(x);
+
+x = 0b1010;
+System.out.println(x);
+}
+}
+
+
+class Test{
+public static void main(String args[]){
+byte b1 = -128;
+System.out.println(b1);
+b1 = 127;
+System.out.println(b1);
+// b1 = -129;
+// b1 = 128;
+
+short s = -129;
+System.out.println(s);
+s = 128;
+System.out.println(s);
+s = -32768;
+System.out.println(s);
+s = 32767;
+System.out.println(s);
+
+// s = -32893;
+// s = 32893;
+
+int x = -32893;
+System.out.println(x);
+x = 32893;
+System.out.println(x);
+
+x = -2147483648;
+System.out.println(x);
+x = 2147483647;
+System.out.println(x);
+
+// x = -2147483649;
+// x = 2147483648;
+
+long y = -2147483648;
+System.out.println(y);
+y = 2147483647;
+System.out.println(y);
+// y = -2147483649;
+// y = 2147483648;
+
+y = -2147483649L;
+System.out.println(y);
+y = 2147483648L;
+System.out.println(y);
+
+// System.out.println(9898989898);
+System.out.println(9898989898L);
+
+}
+}
+
+class Test{
+public static void main(String args[]){
+byte b1 = 127;
+byte b2 = 127L;
+int x = 127L;
+short s = 127L;
+
+}
+}
+
+ // Assignment of wider to lower is not possible
+ // 8 byte  -> 4 byte -> 2 byte -> 1 byte Not Possible
+
+
+Floating Literals
+-----------------
+	Can be used for float and double
+	Default type is double
+	to store in float F/f suffix is required.
+	to store in float D/d suffix is optional.
+
+class Test{
+public static void main(String args[]){
+double d1 = 123.45;
+System.out.println(d1);
+double d2 = 123.45D;
+System.out.println(d2);
+// float f1 = 1.0;
+float f2 = 1.0F;
+System.out.println(f2);
+
+
+double d3 = 123.45;
+double d4 = 12.345e1;
+double d5 = 1.2345e2;
+double d6 = 12.345e+1;
+double d7 = 1.2345e+2;
+System.out.println(d3);
+System.out.println(d4);
+System.out.println(d5);
+System.out.println(d6);
+System.out.println(d7);
+
+double d8 = 12345.0e-2;
+double d9 = 1234.50e-1;
+System.out.println(d8);
+System.out.println(d9);
+
+
+}
+}
+
+null Literals
+-------------
+	null can be store in any reference type variable
+
+class Test{
+public static void main(String args[]){
+
+String s = null;
+System.out.println(s);
+Test t = null;
+Student st = null;
+
+System.out.println(s);
+System.out.println(t);
+System.out.println(st);
+
+String arg1[] = null;
+int arg2[] = null;
+System.out.println(arg1);
+System.out.println(arg2);
+}
+}
+
+class Student {}
+
+/*
+boolean	Boolean Literals
+char	Character Literals
+byte	Integral Literals
+short	Integral Literals
+int	Integral Literals
+long	Integral Literals
+float	Floating Literals
+double	Floating Literals
+String	String Literals
+
+Any Reference	null Literals
+
+*/
+
+Operator
+---------
+	To perform some operation
+How many values:
+Unary Operator -> Only 1 value required
+Binary Operator -> 2 Values required
+Ternary Operator -> 3 Values requied
+
+Arithmetic Operator 
+	+	ADD Binary and Unary
+	-	SUB Binary and Unary
+	*	MUL Binary
+	/	DIV Binary
+	%	MOD Binary
+	etc
+
+/*
+char	2 byte
+byte	1 byte
+short	2 byte
+int	4 byte
+long	8 byte
+float	4 byte
+double	8 byte
+
+Arithmentic Operator
+	returns int or higher/wider then int	
+	byte, byte	int
+	char, char	int
+	short, short	int
+	int , int	int
+	long, long	long
+	float, float	float
+	double, double	double
+
+	byte, int	int
+	byte, long	long
+	int , long	long
+	int , float	float
+	long, float	float
+	long, double	double
+	
+*/
+
+class Test{
+public static void main(String args[]){
+
+int a = 12;
+int b = +a;
+int c = -a;
+System.out.println(a);
+System.out.println(b);
+System.out.println(c);
+
+byte b1 = 12;
+byte b2 = b1;
+
+// byte b3 = +b1;
+// byte b4 = -b1;
+
+int x = +b1;
+int y = -b1;
+System.out.println(x);
+System.out.println(y);
+
+int m = 12;
+int n = 23;
+int p = m + n;
+System.out.println(p);
+
+byte b5 = 12;
+byte b6 = 23;
+byte b7 = 35;
+
+// byte b8 = b5 + b6;
+
+}
+}
+
+
+class Test{
+public static void main(String args[]){
+byte b1 = 12;
+byte b2 = 23;
+// byte b3 = b1 + b2;
+
+byte b4 = 35;
+
+final byte b5 = 12;
+final byte b6 = 23;
+
+byte b7 = b5 + b6;  // Same as byte b7 = 35;
+
+final byte b8;
+b8 = 12;
+
+// byte b9 = b5 + b8;
+
+}
+}
+
+	
+Assignment Operator (Binary)
+	= 	
+
+Relational Operator (Binary)
+	>
+	<
+	>=
+	<=
+ 	==
+	!=
+Conditional Operator
+	<booleanValue>? <value1> : <value2> 	
+Logical Operator
+	&& AND 	Binary 
+	|| OR	Binary
+	!  NOT	Unary
+
+Increment Unary
+	++
+Decrement Unary
+	--
+
+
+
+
+
+
+
+
+
+
+
+		

@@ -1,0 +1,295 @@
+
+Need some programming model to develop any application.
+the two main programming models available:
+-> Procedure oriented programming (POP)
+-> Object oriented programming (OOP)
+
+Procedure oriented programming (POP)
+===================================
+Functions are the main building blocks
+Applications will be divided into multiple functions
+
+
+Object Oriented Programming
+============================
+Objects are the main building blocks
+Applications will be divided into multiple objects.
+
+An object has state, behavior.
+State and behavior of an object can be defined in a class.
+
+
+OOPS Concept/Principles of OOPs:
+-----------------------------------
+
+Abstraction
+Abstraction is the process of providing necessary properties and operations of an object. and hiding the internal details/implementation from the end user.
+
+Encapsulation
+Encapsulation is a process of describing/wrapping the state and behavior of an object in a class.
+
+Polymorphism
+Polymorphism (One name - Many forms)
+Ability of an object to behave differently at different situations.
+
+Ex:
+1. Power button has polymorphic behavior
+	a. When you press once, it will switch on the device.
+	b. When you press it again device will be switched off.
+2. + Operator in java has polymorphic behavior
+	a. When operands are numeric then it will perform arithmetic addition.
+	b. When the operands are of String type then it will perform String Concatenation.
+
+
+Inheritance
+Inheritance is the process of writing new class by inheriting commonly used state and behavior of existing class.
+
+Class & Object
+--------------
+Class -> 
+	extended version of structure
+	hold data and the related functionality together.
+	is blueprint/prototype of the object
+	logical description of an object
+	
+
+	data/ state/ variables	
+	functionality /behavior /operations /methods 
+
+Syntax:
+	class keyword is used to define class in Java
+
+	class <className>{
+		// Members of the class
+	}
+
+Example:	
+	class Student {
+		int sid;
+		String name;
+
+	  void showDetails(){
+		System.out.println("Sid "+sid +", Name "+name);
+	  }
+
+	}
+
+Object ->
+---------
+	Physical representation of the class
+	instance of the class. 
+	is a runtime entities.Occupies space in memory during execution
+	Always memory for object will be allocated in Heap Memory
+	Any number of object can be created.
+
+	new operator is used to create object in Java.
+
+Syntax:
+	<className> <refVarName> = new <className>();
+	
+	
+	Student s1 = new Student();
+	Student s2 = new Student();
+	....
+	s1 and s2 are reference variable which is holding the reference of student object.
+
+	to access the member, you can use . operator
+		<refVarName>.<dataMember/variable>
+		<refVarName>.<memberFunction/method>
+		
+
+		s1.sid
+		s1.name
+		s1.showDetails()
+
+		
+		s2.sid
+		s2.name
+		s2.showDetails()
+
+
+	When the reference variable is null and you try to access any member, you will NullPointerException at runtime.
+
+	For the variables of the object, JVM will provide default values.
+
+
+JVM Task:
+	Student s1 = new Student();
+	1) Allocate the memory for reference variable (8 byte)
+	2) JVM will load the Class if is not oaded already.				Note: JVM loads the class only once.  
+	3) Create the new object./ Memory will be allocated for the instance variable.
+	4) Initialize the object's variables with default value.
+	5) Assign the address/reference of object to reference variable.
+	
+class Test{
+public static void main(String[] args){
+System.out.println("Welcome");
+
+Student s1 = new Student();
+s1.showDetails();
+s1.sid = 101;
+s1.name = "Aadi";
+s1.showDetails();
+
+Student s2 = new Student();
+s2.showDetails();
+s2.sid  = 102;
+s2.name = "Rahul";
+s2.showDetails();
+
+System.out.println("Thanks");
+}
+}
+
+class Student {
+int sid;
+String name;
+
+void showDetails(){
+System.out.println("Sid "+sid +", Name "+name);
+}
+}
+
+
+Members of the class
+====================
+Variables
+Blocks / Initialization Block
+Constructor
+Method
+Inner class
+
+
+Variables
+---------
+Depending on Data Type
+	Primitive Variable
+	Reference Variable
+
+Depending on Scope, Variable declared directly inside the class, 
+	Static Variable
+	Instance Variable
+
+Static Variable:
+-> The variable declared in the class with static keyword.
+-> also known as Class variable
+-> Memory will be allocated only once during the time of loading the class
+-> Only one memory will be allocated and shared by all the objects.
+-> Can be accessed with ClassName/refVariable which holds object/ null referece
+
+Instance Variable:
+-> The variable declared in the class without keyword.
+-> also known as Non Static variable
+-> Memory will be allocated during the time of creating the object.
+-> Seperate memory will be allocated for each object.
+-> Can not be accessed with ClassName
+-> Must be accessed with refVariable which holds object
+-> NullPointerException when try to access with null referece
+
+
+Designing Student class for OITS institute. The totalCourse fee is same for all the student.
+	
+-> The institute name should have existance without single student or not
+-> Institute name will be common to all the student or may differ from student to student
+-> The Total Course Fee should have existance without single student or not
+-> Total Course Fee will be common to all the student
+
+class Student{
+int sid;	// Primitive Instance
+String name;	// Reference Instance
+
+static String insName;		// Reference Static
+static double coueFee;		// Primitive Static
+}
+
+		
+class Test{
+public static void main(String[] args){
+System.out.println("Welcome");
+
+System.out.println(Student.insName);
+
+// System.out.println(Student.sid);
+
+Student s1 = new Student();
+Student s2 = new Student();
+s1.showDetails();
+s2.showDetails();
+
+s1.sid = 101;
+s1.name = "Aadi";
+s1.insName = "OITS"; 
+// Same as Student.insName = "OITS";
+s1.showDetails();
+s2.showDetails();
+
+s2.sid = 102;
+s2.name = "Rahul";
+s2.insName = "XYZ";
+// Same as Student.insName = "XYZ";
+s1.showDetails();
+s2.showDetails();
+
+System.out.println("Thanks");
+}
+}
+
+class Student{
+static String insName = "MYINS";
+int sid;	
+String name ;	
+
+void showDetails(){
+System.out.println("Sid "+sid+" ,Name :"+name+" ,insName "+insName);
+}
+}
+
+
+class Test{
+public static void main(String[] args){
+System.out.println("Welcome");
+System.out.println(Student.insName);
+// System.out.println(Student.sid);
+Student st = null;
+System.out.println(st.insName);
+// Same as System.out.println(Student.insName);
+System.out.println(st.sid);
+System.out.println("Thanks");
+}
+}
+
+class Student{
+static String insName = "MYINS";
+int sid;	
+String name ;	
+
+void showDetails(){
+System.out.println("Sid "+sid+" ,Name :"+name+" ,insName "+insName);
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+

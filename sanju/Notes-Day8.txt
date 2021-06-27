@@ -1,0 +1,290 @@
+Array
+======
+Creating Array Reference variable & Objects
+-------------------------------------------
+	<dataType>[] <varName>;	-> Array reference Variable;
+	<varName> = new <dataType> [<size>];
+
+	<dataType>[] <varName> = new <dataType> [<size>];
+
+Access The Data
+---------------
+	<varName>.length	
+	varName[<index>]
+
+
+
+Creating Array Reference variable & Objects & Initializing Element
+-------------------------------------------------------------------
+ <dataType>[] <varName> = {<val1>, <val2>, <val3>, ... , <valN>};
+
+Anonymous Array
+ <dataType>[] <varName> = new <dataType>[]{<val1>, <val2>, <val3>, ... , <valN>};
+
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+
+/*
+int[] var  = new int[4];
+var[0] = 12;
+var[1] = 23;
+var[2] = 34;
+var[3] = 45;
+*/
+int[] var  = {120, 230, 340, 450};
+int[] var1  = new int[]{120, 230, 340, 450, 560};
+System.out.println(var.length);  
+System.out.println("For Each Statement");  
+for(int data : var) {
+  System.out.println(data);  
+}
+System.out.println("Normal For Statement");  
+for(int i = 0;i < var.length; i++) {
+  int data =  var[i];
+  System.out.println(data);  
+}
+
+System.out.println("Thanks");
+}
+}	
+
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+for(int data : new int[5]) {
+System.out.println(data);
+}
+for(int data : new int[]{10,20,30}) {
+System.out.println(data);
+}
+/*
+for(int data : {10,20,30}) {
+System.out.println(data);
+}
+*/
+System.out.println("Thanks");
+}
+}
+
+	
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+String[] names = new String[]{"JAVA", "JDBC","SPRING"};
+System.out.println("Null Check "+ (names == null));
+System.out.println("Length"+ names.length);
+for (int i= 0; i < names.length; i++){
+String val = names[i];
+System.out.println(i +"\t"+val);
+}
+System.out.println("Thanks");
+}
+}
+
+
+Command Line Argument (CLA)
+------------------------------
+	Arguments provided to main method from command line while executing.
+
+	java <className> <val1> <val2> <val3> <val4> ....
+	
+
+class Test{
+public static void main(String[] args){
+System.out.println("Welcome");
+
+System.out.println("Null Check "+ (args == null));
+
+System.out.println("Length "+ args.length);
+
+for (int i= 0; i < args.length; i++){
+String val = args[i];
+System.out.println(i +"\t"+val);
+}
+
+System.out.println("Thanks");
+}
+}
+
+Execute this as below
+----------------------
+java Test
+java Test ABC
+java Test ABC 123
+java Test ABC 124 true
+java Test ABC 124 Manish Ranjan
+java Test ABC 124 "Manish Ranjan"
+
+JVM Task:
+----------
+java Test
+	Collect number of values after class
+		int size = 0;
+	Create String array with collected size
+		String[] args = new String[size];
+	Store the collected values in array at theie index
+	Call the main method of class by passing array as argument		
+		Test.main(args);
+	
+
+java Test ABC 124 true
+	Collect number of values after class
+		int size = 3;
+	Create String array with collected size
+		String[] args = new String[size];
+	Store the collected values in array at theie index	
+		args[0] = "ABC";
+		args[1] = "124";
+		args[2] = "true";
+	Call the main method of class by passing array as argument		
+		Test.main(args);
+		
+
+
+class Test{
+public static void main(String[] args){
+System.out.println("Welcome");
+
+if (args.length >= 2){
+ String first = args[0];
+ String second = args[1];
+ System.out.println(first + second);
+ int a = Integer.parseInt(first);
+ int b = Integer.parseInt(second);
+ System.out.println(a + b);
+} else {
+System.out.println("**Provide two int values as CLA");
+}
+
+System.out.println("Thanks");
+}
+}
+
+
+2-D Array
+------------
+Multi-D array is collection of other lower dimention array.	
+2-D array is Array/Collection of 1-D array.
+
+<dataType> [][] <varName>= new <dataType>[<size1>][<size2>];
+
+
+<dataType> [][] <varName> = { 
+	{<val1>, <val2>, <val3>, ...},
+	{<val1>, <val2>, <val3>, ...},
+	{<val1>, <val2>, <val3>, ...},
+	...
+};
+
+
+<dataType> [][] <varName>= new <dataType>[][]{ 
+	{<val1>, <val2>, <val3>, ...},
+	{<val1>, <val2>, <val3>, ...},
+	{<val1>, <val2>, <val3>, ...},
+	...
+};
+
+class Test{
+public static void main(String[] args){
+System.out.println("Welcome");
+int[][] ar;
+ar = new int[3][4];
+
+System.out.println(ar);
+System.out.println(ar.length);
+System.out.println(ar[0]);
+System.out.println(ar[0].length);
+System.out.println(ar[1]);
+System.out.println(ar[1].length);
+System.out.println(ar[2]);
+System.out.println(ar[2].length);
+
+
+for(int i = 0; i < ar.length; i++) {
+int[] temp = ar[i];
+for(int ind = 0; ind < temp.length; ind++) {
+  int data = temp[ind];
+  System.out.print(data+"\t");
+}
+System.out.println();
+}
+
+int initialVal = 100;
+for(int i = 0; i < ar.length; i++) {
+int[] temp = ar[i];
+for(int ind = 0; ind < temp.length; ind++) {
+ temp[ind] = initialVal++;
+}
+}
+
+for(int i = 0; i < ar.length; i++) {
+int[] temp = ar[i];
+for(int ind = 0; ind < temp.length; ind++) {
+  int data = temp[ind];
+  System.out.print(data+"\t");
+}
+System.out.println();
+}
+
+
+System.out.println("Thanks");
+}
+}
+
+
+
+
+class Test{
+public static void main(String[] args){
+System.out.println("Welcome");
+int[][] ar = {
+	{101,102,103,104},
+	{105,106,107,108},
+	{109,110,111,112}
+	};
+
+System.out.println(ar);
+System.out.println(ar.length);
+System.out.println(ar[0]);
+System.out.println(ar[0].length);
+System.out.println(ar[1]);
+System.out.println(ar[1].length);
+System.out.println(ar[2]);
+System.out.println(ar[2].length);
+
+for(int i = 0; i < ar.length; i++) {
+int[] temp = ar[i];
+for(int ind = 0; ind < temp.length; ind++) {
+  int data = temp[ind];
+  System.out.print(data+"\t");
+}
+System.out.println();
+}
+
+
+System.out.println("-----");
+
+for(int i = 0; i < ar.length; i++) {
+for(int ind = 0; ind < ar[i].length; ind++) {
+  int data = ar[i][ind];
+  System.out.print(data+"\t");
+}
+System.out.println();
+}
+
+System.out.println("-----");
+
+for(int[] temp : ar) {
+for(int data : temp) {
+  System.out.print(data+"\t");
+}
+System.out.println();
+}
+
+System.out.println("Thanks");
+}
+}
+
+	Object Oriented Programming
+	---------------------------

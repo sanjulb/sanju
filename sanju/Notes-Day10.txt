@@ -1,0 +1,443 @@
+Initialization Blocks
+=====================
+Group of statements inside curly braces.
+Initialization Blocks does not have any name.
+No modifiers can be used with Initialization Blocks.
+These block will be executed automaticall by the JVM.
+There are two types of Initialization Block:
+	1) Instance Initialization Block
+	2) Static Initialization Block
+
+Instance Initialization Block
+------------------------------
+Any initialization block in the class directly without any modifier is called Instance Initialization Block.
+
+JVM will execute instance block automatically while creating and initializing the object/instance of the class.
+
+Instance Block will be executed only once for one object at the time of creating and initializing the object.
+
+For multiple object/instance, instance blocks will be executed multiple times, once per object.
+
+From the instance block/context, you can access the static variable. (Memory is already allocated for static variable)
+
+Static Initialization Block
+-----------------------------
+Any initialization block in the class directly with static modifier is called Static Initialization Block.
+
+JVM will execute static block automatically while loading and initializing the class itself.
+
+Static Block will be executed only once at the time of loading and initializing the class.
+
+From the static block/context, you can not access the instance variable. (Static is independent of object)
+
+class Test{
+public static void main(String[] args){
+System.out.println("Welcome");
+
+Student s1 = null;
+Student s2 = null;
+Student s3 = null;
+System.out.println("Ref Created");
+
+
+System.out.println("**Creating 1st Object");
+s1 = new Student();
+
+System.out.println("**Creating 2nd Object");
+s2 = new Student();
+
+System.out.println("**Creating 3rd Object");
+s3 = new Student();
+
+System.out.println("Thanks");
+}
+}
+
+class Student{
+{
+System.out.println("I Block 1");
+}
+static{
+System.out.println("S Block 1");
+}
+{
+System.out.println("I Block 2");
+}
+static{
+System.out.println("S Block 2");
+}
+}
+
+
+--------------
+class Test{
+
+public static void main(String[] args){
+System.out.println("Welcome");
+
+
+}
+}
+
+class Student{
+ int sid;
+ static String insName;
+ static {
+     System.out.println("S Block");
+     //System.out.println(sid);
+ }
+}
+
+/*
+Class Loading
+	Reading the class information
+	Allocate the memory for static variable
+	Static Block will be executed
+
+Object Creation
+	Allocate the memory for instance variable
+	Instance Block will be executed
+	
+*/
+
+
+Local Variable & Local Block
+============================
+You can declare variable inside class directly
+	-> Instance Variable
+ 	-> Static Variable
+	JVM will initialize instance/static variable with default value.
+
+
+
+You can declare variable inside member of class like method, block, constructor etc
+	-> Local Variable
+	final modified is allowed.
+	JVM will not initialize local variable with default value.
+	You must initialize local variable before its uses.
+
+Local Block
+-----------
+You can declare block inside class directly
+	-> Instance Block
+ 	-> Static Block
+
+You can declare block inside member of class like method, block, constructor etc
+	-> Local Block
+
+class Test{
+public static void main(String[] args){
+int xy;
+int ab;
+// System.out.println(ab);
+ab = 12;
+System.out.println(ab);
+}
+}
+	
+
+class Test{
+
+public static void main(String[] args){
+System.out.println("Welcome");
+Hello h = new Hello();
+h.showDetails();
+h.printData();
+System.out.println("Thannks");
+}
+}
+
+class Hello{
+String ab = "instance";
+static String bc = "static";
+
+void showDetails() {
+   System.out.println("-- showDetails --");
+   String s = "local";
+   System.out.println(ab);
+   System.out.println(bc);
+   System.out.println(s);
+}
+
+void printData() {
+   System.out.println("-- printData --");
+   System.out.println(ab);
+   System.out.println(bc);
+  // System.out.println(s);
+}
+}
+
+
+
+class Test{
+public static void main(String[] args){
+Hello h = new Hello();
+h.show();
+}
+}
+class Hello{
+void show(){
+   int ab = 10;
+   System.out.println(ab);
+   {
+     System.out.println("Local Block -> main");
+     System.out.println("Local Block Start");
+     System.out.println(ab);
+     int bc = 20;
+     System.out.println(bc);
+     // String ab = "SECOND";
+     System.out.println("Local Block Ends");
+   }
+ // System.out.println(bc);
+  System.out.println(ab);
+  String bc = "SECOND";
+  System.out.println(bc);
+}
+
+
+  {
+  System.out.println("I Block ");
+     {
+       System.out.println("Local Block -> I Block");
+     }
+  }
+
+  static{
+  System.out.println("S Block ");
+     {
+       System.out.println("Local Block -> S Block");
+     }
+  }
+
+}
+
+class Test{
+float ab = 12.23F;
+static int xy = 123;
+public static void main(String[] args){
+   int ab = 12;
+   String xy = "ABC";
+   //String ab = "MSG";
+  System.out.println(ab);
+  System.out.println(xy);
+}
+}
+
+
+Constructor
+-----------
+class Test{
+public static void main(String[] args){
+Student s1 = new Student();
+s1.show();
+s1.sid = -1;
+s1.age = -2;
+s1.show();
+
+Student s2 = new Student();
+s2.show();
+s2.sid = 123;
+s2.age = 28;
+s2.show();
+
+Student s3 = new Student();
+s3.show();
+s3.sid = 987;
+s3.age = 45;
+s3.show();
+}
+}
+
+class Student {
+int sid = 1;
+int age = 18;
+void show() {
+System.out.println("Sid "+sid+", Age "+age);
+}
+}
+
+Issue:
+ 1) For each object, we need to Repeat the code to initialize the fields.
+ 2) Since fields are direcly accessible, invalid values can be assigned.
+
+Constructor looks like a method but 
+ -> Name must be same as Class name
+ -> does not have return type.(not even void)
+ -> Used to create the object and to initialize instance variable
+ -> JVM uses constructor to create object.
+ -> When you dont write any constructor then compiler will provide one default constructor. It is no-argument constructor.
+ -> When you write any constructor then compiler will not provide any default constructor. Only your defined constructor will be available.
+ -> You can define multiple constructor in a class by changing the parameter. This is called Constructor Overloading.
+
+class Test{
+public static void main(String[] args){
+Student s1 = new Student();
+s1.show();
+
+Student s2 = new Student();
+s2.show();
+
+Student s3 = new Student();
+s3.show();
+}
+}
+
+class Student {
+int sid ;
+int age ;
+Student() {
+System.out.println("-- Student()");
+sid = 1;
+age = 18;
+}
+void show() {
+System.out.println("Sid "+sid+", Age "+age);
+}
+}
+
+Case 1: No Constructor Defined
+class Student {
+int sid ;
+int age ;
+}
+---  Compiler Generated Class  -----
+class Student {
+int sid ;
+int age ;
+Student(){ } // Inserted by Compiler
+}
+
+
+Case 2: Constructor Defined by User
+class Student {
+int sid ;
+int age ;
+Student(){ 
+... 
+}
+}
+---  Compiler Generated Class  -----
+class Student {
+int sid ;
+int age ;
+Student(){  // User Provided Constructor
+... 
+}
+}
+
+
+Case 3: Constructor Defined by User
+class Student {
+int sid ;
+int age ;
+Student(int ab){ 
+... 
+}
+}
+--- Compiler Generated Class -----
+class Student {
+int sid ;
+int age ;
+Student(int ab){  // User Provided Constructor
+... 
+}
+}
+
+class Test{
+public static void main(String[] args){
+Hello h1 = new Hello();
+//Hello h2 = new Hello(12);
+
+Hai r1 = new Hai();
+//Hai r2 = new Hai(12);
+
+// Welcome w1 = new Welcome();
+Welcome w2 = new Welcome(12);
+
+Greet g1 = new Greet();
+Greet g2 = new Greet(12);
+}
+}
+
+class Hello { }
+class Hai { 
+Hai(){
+System.out.println("Hai ()");
+}
+}
+class Welcome { 
+Welcome(int xy){
+System.out.println("Welcome (int)");
+}
+}
+class Greet{ 
+Greet(){
+System.out.println("Greet ()");
+}
+Greet(int xy){
+System.out.println("Greet (int)");
+}
+}
+
+
+
+class Test{
+public static void main(String[] args){
+Student s1 = new Student();
+s1.show();
+
+Student s2 = new Student("Manish");
+s2.show();
+
+Student s3 = new Student(35);
+s3.show();
+
+Student s4 = new Student(45, "Manoj");
+s4.show();
+
+Student s5 = new Student("Rahul", 25);
+s5.show();
+
+Student s6 = new Student("Aadi", 14);
+s6.show();
+
+}
+}
+class Student {
+int age;
+String name;
+
+Student(){
+System.out.println("\n--Student()");
+age=18;
+name ="Dummy";
+}
+
+Student(int age1){
+System.out.println("\n--Student(int)");
+age=age1;
+}
+
+Student(String name1){
+System.out.println("\n--Student(String)");
+name =name1;
+}
+
+Student(int age1, String name1){
+System.out.println("\n--Student(int, String)");
+age = age1;
+name =name1;
+}
+
+Student(String name1, int age1){
+System.out.println("\n--Student(String, int)");
+if (age1 >= 18){
+ age = age1;
+}
+name =name1;
+}
+
+void show(){
+System.out.println("Age "+age+", Name "+name);
+}
+}

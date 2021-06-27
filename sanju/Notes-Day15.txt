@@ -1,0 +1,644 @@
+Access Modifier
+---------------
+-> Specify the scope/visibility/accessibility of member
+-> 4 Access Scope but 3 access modifiers
+
+	Private Scope		private
+		Access only from within the class
+
+     	Default/Package Scope	(No Access Modifier)
+		Access only from same package
+	
+	Protected Scope		protected
+		Access from same package
+		Access from outside package as subclass member
+			-> As current sub class object member (As inherited member)
+		Can not be accessed from outside package from sub class
+			-> With Super class object
+			-> With other sub class object
+		Can not be accessed from outside package from non sub class
+
+	Public Scope		public
+		Access from any where
+
+
+public class Test{
+public static void main(String[] args) {
+
+Hello h1 = new Hello();
+h1.ab = 234;
+h1.show();
+
+Hai h2 = new Hai();
+h2.ab = 987;
+h2.display();
+
+}
+}
+
+class Hello {
+int ab = 10;
+void show(){
+  System.out.println(ab);// Current Object
+  System.out.println(this.ab); // Current Object
+
+  Hello h = new Hello();
+  System.out.println(h.ab); // Different Object
+}
+}
+
+class Welcome extends Hello {}
+
+class Hai extends Hello { 
+void display(){
+  System.out.println(ab); // Current Object
+  System.out.println(this.ab); // Current Object
+  System.out.println(super.ab); // Current Object
+
+  Hello h = new Hello();
+  System.out.println(h.ab);// Different object (super class)
+
+  Hai hai = new Hai();
+  System.out.println(hai.ab);// Different object (same/current sub class)
+
+  Welcome ref = new Welcome();
+  System.out.println(ref.ab); // Different object (other sub class)
+}
+}
+=============
+
+
+
+Hello.java
+-----------
+package com.p1;
+
+public class Hello {
+private String a = "private";
+String b = "default";
+protected String c = "protected";
+public String d = "public";
+
+void show(){
+ System.out.println("-- directly - from current object --");
+ System.out.println(a);
+ System.out.println(b);
+ System.out.println(c);
+ System.out.println(d);
+
+ System.out.println("-- using this keyword - from current object --");
+ System.out.println(this.a);
+ System.out.println(this.b);
+ System.out.println(this.c);
+ System.out.println(this.d);
+
+ Hello h = new Hello();
+ System.out.println("-- using different object --");
+ System.out.println(h.a);
+ System.out.println(h.b);
+ System.out.println(h.c);
+ System.out.println(h.d);
+}
+}
+
+Sub Class in same package
+
+Welcome.java
+----------
+package com.p1;
+
+class Hai extends Hello{ }
+
+public class Welcome extends Hello {
+void display(){
+ System.out.println("-- directly - from current object --");
+ //System.out.println(a);
+ System.out.println(b);
+ System.out.println(c);
+ System.out.println(d);
+
+ System.out.println("-- using this keyword - from current object --");
+ //System.out.println(this.a);
+ System.out.println(this.b);
+ System.out.println(this.c);
+ System.out.println(this.d);
+
+ System.out.println("-- using super keyword - from current object --");
+ //System.out.println(super.a);
+ System.out.println(super.b);
+ System.out.println(super.c);
+ System.out.println(super.d);
+
+ Hello h = new Hello();
+ System.out.println("-- using super class object --");
+ //System.out.println(h.a);
+ System.out.println(h.b);
+ System.out.println(h.c);
+ System.out.println(h.d);
+
+ Welcome w = new Welcome();
+ System.out.println("-- using current class different object --");
+ //System.out.println(w.a);
+ System.out.println(w.b);
+ System.out.println(w.c);
+ System.out.println(w.d);
+
+ Hai h1 = new Hai();
+ System.out.println("-- using other subclass object --");
+ //System.out.println(h1.a);
+ System.out.println(h1.b);
+ System.out.println(h1.c);
+ System.out.println(h1.d);
+}
+}
+
+Non Sub class in the same package
+----------------------------------
+package com.p1;
+
+public class Test1{
+public static void main(String args[]){
+Hello h = new Hello();
+//System.out.println(h.a);
+System.out.println(h.b);
+System.out.println(h.c);
+System.out.println(h.d);
+}
+}
+
+
+Sub Class in other package
+
+Thanks.java
+--------
+package com.p2;
+
+import com.p1.Hello;
+
+class Abc extends Hello{}
+
+public class Thanks extends Hello{
+void display(){
+System.out.println("-- directly - from current object --");
+ //System.out.println(a);
+ //System.out.println(b);
+ System.out.println(c);
+ System.out.println(d);
+
+ System.out.println("-- using this keyword - from current object --");
+ //System.out.println(this.a);
+ //System.out.println(this.b);
+ System.out.println(this.c);
+ System.out.println(this.d);
+
+ System.out.println("-- using super keyword - from current object --");
+ //System.out.println(super.a);
+ //System.out.println(super.b);
+ System.out.println(super.c);
+ System.out.println(super.d);
+
+ System.out.println("-- using current class different object --");
+ Thanks th = new Thanks();
+ //System.out.println(th.a);
+ //System.out.println(th.b);
+ System.out.println(th.c);
+ System.out.println(th.d);
+
+ System.out.println("-- using super class object --");
+ Hello h = new Hello();
+ //System.out.println(h.a);
+ //System.out.println(h.b);
+ //System.out.println(h.c);
+ System.out.println(h.d);
+
+ System.out.println("-- using super class object --");
+ Abc ref = new Abc();
+ //System.out.println(ref.a);
+ //System.out.println(ref.b);
+ //System.out.println(ref.c);
+ System.out.println(ref.d);
+
+}
+}
+
+
+
+Non Sub Class in other package
+Test2.java
+---------------
+package com.p2;
+
+import com.p1.Hello;
+
+public class Test2{
+public static void main(String args[]){
+Hello h = new Hello();
+//System.out.println(h.a);
+//System.out.println(h.b);
+//System.out.println(h.c);
+System.out.println(h.d);
+}
+}
+
+
+SameclassDirectly
+	Private		Yes
+	Default		Yes
+	Protected	Yes
+	Public		Yes
+
+SameclassUsingThis
+	Private		Yes
+	Default		Yes
+	Protected	Yes
+	Public		Yes
+SameclassUsingDifferentObject
+	Private		Yes
+	Default		Yes
+	Protected	Yes
+	Public		Yes
+
+In Same Packahe
+  Non Sub class
+	Private		No
+	Default		Yes
+	Protected	Yes
+	Public		Yes
+
+  SubclassDirectly
+	Private		No
+	Default		Yes
+	Protected	Yes
+	Public		Yes
+
+  SubclassUsingThis
+	Private		No
+	Default		Yes
+	Protected	Yes
+	Public		Yes
+
+  SubclassUsingSuper
+	Private		No
+	Default		Yes
+	Protected	Yes
+	Public		Yes
+
+  SubclassUsingOtherObjectOfCurrentClass
+	Private		No
+	Default		Yes
+	Protected	Yes
+	Public		Yes
+
+  SubclassUsingSuperObject
+	Private		No
+	Default		Yes
+	Protected	Yes
+	Public		Yes
+
+  SubclassUsingOtherSubClassObject
+	Private		No
+	Default		Yes
+	Protected	Yes
+	Public		Yes
+
+In Other Packahe
+ Non Sub class
+	Private		No
+	Default		No
+	Protected	No
+	Public		Yes
+
+
+ SubclassDirectly
+	Private		No
+	Default		No
+	Protected	Yes
+	Public		Yes
+
+ SubclassUsingThis
+	Private		No
+	Default		No
+	Protected	Yes
+	Public		Yes
+
+ SubclassUsingSuper
+	Private		No
+	Default		No
+	Protected	Yes
+	Public		Yes
+
+ SubclassUsingOtherObjectOfCurrentClass
+	Private		No
+	Default		No
+	Protected	Yes
+	Public		Yes
+
+ SubclassUsingSuperObject
+	Private		No
+	Default		No
+	Protected	No
+	Public		Yes
+
+ SubclassUsingOtherSubClassObject
+	Private		No
+	Default		No
+	Protected	No
+	Public		Yes
+
+
+More Restrictive
+	Public -> Protected -> Default -> Private
+		
+Less Restrictive
+	Private -> Default -> Protected -> Public
+		
+
+public class Test{
+public static void main(String[] args) {
+Hai ref = new Hai(123);
+//System.out.println(ref.ab);
+System.out.println(ref.getAb());
+ref.setAb(987);
+System.out.println(ref.getAb());
+ref.setAb(678);
+System.out.println(ref.getAb());
+ref.setAb(345);
+System.out.println(ref.getAb());
+}
+}
+
+class Hello {
+private int ab = 10;
+Hello(int ab) {
+this.ab = ab;
+System.out.println(this.getClass());
+}
+void setAb(int ab){
+ this.ab = ab;
+}
+int getAb(){
+return this.ab;
+}
+}
+
+class Hai extends Hello {
+Hai(int ab) {
+ super(ab);
+ System.out.println(this.getClass());
+}
+}
+
+Method Overriding
+==================
+Process of implementing super class method in sub class with same signature.
+
+-> Method name must be same
+-> Method Parameter must be same.
+
+-> Access scope must be same or less restrictive. Can not be more restrictive.
+-> for primitive return type, Return type must be same
+-> for reference return type, Return type must be same or sub type.
+-> Instance can not be overridden as static.
+-> Static can not be overridden.
+-> Final method can not be overridden.
+
+class Hello {
+void m1(){ }
+void m11(){ }
+public void m12(){ }
+void m13(){ }
+void m14(){ }
+}
+
+class Hai extends Hello {
+
+private void m2(){ } // New method of Hai
+
+void m11(){ } // Overriding
+
+protected void m12(int a, String b){ } // Overloading
+
+static void m13(){ } // Invalid
+
+int m14(){ // Invalid
+return 0;
+}
+}
+
+When you re-implement the instance method in the sub class then implementation will be called depending on actual object.(Overriden logic) will be invoked.
+
+When you re-implement the static method in the sub class then implementation will be called depending on the Reference type. (Static is related to class)
+
+public class Test{
+public static void main(String[] args) {
+
+Hello h1 = new Hello();
+h1.m1();
+h1.m2();
+h1.m3();
+h1.m4();
+
+Hello h2 = new Hai();
+h2.m1();
+h2.m2();
+h2.m3();
+h2.m4();
+
+Hai h3 = new Hai();
+h3.m1();
+h3.m2();
+h3.m3();
+h3.m4();
+
+h1 = null;
+h2 = null;
+h1.m4();
+h2.m4();
+
+}
+}
+
+class Hello {
+void m1(){
+System.out.println("\n-- Hello.m1()" +this);
+}
+void m2(){
+System.out.println("\n-- Hello.m2()" +this);
+}
+void m3(){
+System.out.println("\n-- Hello.m3() " +this);
+}
+static void m4(){
+System.out.println("\n-- Hello.m4() ");
+}
+}
+
+class Hai extends Hello { 
+void m2(){
+System.out.println("\n--new Hai.m2()" +this);
+}
+
+void m3(){
+super.m3();
+System.out.println("--new Hai.m3()" +this);
+}
+static void m4(){
+System.out.println("\n-- Hai.m4() ");
+}
+}
+----------
+class A { }
+class B extends A { }
+class C { }
+
+class Hello { 
+A process1(){
+ return null;  
+}
+A process2(){
+ return null;  
+}
+A process3(){
+ return null;  
+}
+}
+
+class Hai extends Hello {  
+A process1(){
+ return null;  
+}
+B process2(){ // Valid B is subtype of A
+ return null;  
+}
+C process3(){ // Invalid
+ return null;  
+}
+}
+
+final keyword
+---------------
+	With Variable -> to define constant. The value can not be modified
+	With Class -> You can not define sub class.
+	With Method -> Can not be overriden. (Can not change the implementation)
+
+
+Dynamic Dispatch
+===================
+-> Process of assigning sub type object to super type reference variable.
+-> It can be used to achive dynamic polymorphism.
+
+class A { }
+class B { }
+class C extends A{ }
+class D extends A{ }
+class E extends C{ }
+class F extends D{ }
+
+	A ref = new A();
+        A ref = new B(); // Invalid
+        A ref = new C(); // Valid
+        A ref = new D(); // Valid
+        A ref = new E(); // Valid
+        A ref = new F(); // Valid
+	C ref = new C(); // Valid
+	C ref = new D(); // InValid
+	C ref = new E(); // Valid
+	C ref = new F(); // InValid
+
+Polymorphism
+============
+-> One name with multiple forms.
+-> With single object using single name you can perform different task in different situation.
+	
+Static/Compile Time Polymorphism
+--------------------------------
+-> Achieved using method overloading.
+-> Can be achieved using instance as well as static method
+
+
+public class Test{
+public static void main(String[] args) {
+Service ser = new Service();
+ser.area(12);
+ser.area(12, 10);
+ser.area(12, 10, 23);
+}
+}
+
+class Service{
+void area(int r) {
+ System.out.println("Area of Circle");
+}
+void area(int a, int b) {
+ System.out.println("Area of Rectangle");
+}
+void area(int a, int b, int c) {
+ System.out.println("Area of Triangle");
+}
+}
+
+Dynamic/Runtime Polymorphism
+--------------------------------
+-> Achieved using method overriding and Dynamic Dispatch.
+-> Can be achieved using only instance method.Not with static method.
+
+public class Test{
+public static void main(String[] args) {
+Service serv = new Service();
+serv.findArea(new Shape());
+serv.findArea(new Circle());
+serv.findArea(new Square());
+serv.findArea(new Rectangle());
+}
+}
+
+
+class Service {
+void findArea(Shape shape){
+shape.area();
+shape.show();
+}
+}
+
+
+class Shape{
+void area(){
+System.out.println("Area-> Dummy Implementation");
+}
+static void show(){
+System.out.println("Shape-> show()");
+}
+}
+class Square extends Shape{
+int side;
+void area(){
+System.out.println("Area of Square");
+}
+static void show(){
+System.out.println("Shape-> show()");
+}
+}
+class Circle extends Shape{
+int rad;
+void area(){
+System.out.println("Area of Circle");
+}
+static void show(){
+System.out.println("Shape-> show()");
+}
+}
+class Rectangle extends Shape{
+int a;
+int b;
+void area(){
+System.out.println("Area of Rectangle");
+}
+static void show(){
+System.out.println("Shape-> show()");
+}
+}
+
+class Triangle extends Shape{ }
+
+Abstract Method and Class:
+==========================

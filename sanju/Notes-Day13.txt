@@ -1,0 +1,463 @@
+JVM Task while creating object
+==============================
+Hello h1 = new Hello();
+-> Allocate 8 byte memory for reference variable (h1)
+-> Validate whether class is loaded or not.
+-> When the class is not loaded
+	-> JVM will try to load the class.
+	   -> Read the byte code from .class file
+ 	   -> Stores the class information into the memory (Class Heap)
+	   -> Allocate the memory for static variable and initialize with default value (or provided in the class).
+    	   -> Execute the static block.
+
+-> When the class is loaded
+-> Constructor of the class will be invoked (not executed).
+-> Allocate the memory for instance variable and initialize with default value (or the value provided inside the class).
+-> Instance Block will be executed
+-> Statement from constructor will be executed.
+-> Address/reference of the object will be assigned to reference variable.
+
+
+main method:
+=============
+public static void main(String[] args)
+
+public	-> Access Modifier (main method can be accessed from anywhere)
+static	-> Modifier (main method can be accessed without object)
+void	-> Return type (main method is not returning any value)
+main	-> Method Name
+String[]-> String array Patameter
+		-> Stores the command line argument.
+		
+
+		Class	Inner	ClassVariable	Blocks	Constructors	Method	LocalVariables	LocalBlocks
+private		N/A	A
+protected	
+public		
+final		
+static		
+native
+abstract
+synchronized
+transient
+volatile
+strictfp
+
+Inheritance
+============
+-> Provide implementation of Is-A Relationship.
+-> Process of code re-usability.
+-> Process of writing new class by using/inheriting member of existing class.
+-> Newly defined class is called as Sub/Derived/Child class
+-> Existing class is called as Super/Base/Parent class.
+
+Types of Inheritance
+----------------------
+Simple Inheritance
+	There will be only one super class and only one sub class.
+	A <- B
+	B is inheriting the members from A.	
+	A is super class and B is sub class.
+
+Mutlti-Level Inheritance
+	One super class will have one direct sub class and many indirect sub class.
+	One sub class will have one direct super class and many indirect super class.
+	A <- B <- C <- D
+	A is super class
+	B is inheriting the member of A class so B is subclass for A.
+	C is inheriting the member of B class so 
+		B is super class for C.
+		C is the direct sub class for B.
+		C is the in-direct sub class for A.
+	D is inheriting the member of C class so 
+		C is super class for D.
+		D is the direct sub class for C.
+		D is the in-direct sub class for A and B.
+		
+Multiple Inheritance
+	One sub class can have multiple direct super class.
+	One super class can have one direct super class.
+	A <- C
+	B <- C	
+		C is inheriting member from A and also Member from B.
+		C has two direct super class.
+		C is sub class for A and B both.
+		A has only one direct sub class called C.
+		B also has only one direct subclass called C.
+
+Hierarchical Inheritance
+	One sub class will have onely one direct super class.
+	One super class can have multiple direct sub class.
+	A <- B
+	A <- C	
+		A has two direct sub class i.e B and C.
+		A is super class for B and C.
+		B has only one direct super class called A
+		C has only one direct super class called A
+
+Hybrid:
+	Comination of more than one type of inheritance
+Cyclic:
+	When one class is inheriting itself may be directly or indirectly.
+
+
+Java supports Simple inheritance.
+Java supports Multi-Level inheritance.
+Java supports Hybrid inheritance using classes where multiple is not present.
+Java does not support multiple inheritance using classes.
+Java supports multiple inheritance using Interfaces.
+Java does not support Cyclic inheritance.
+
+
+When class need to inherit member from another class then we should use extends keyword.
+
+When class need to inherit member from interface then we should use implements keyword.
+
+When one interface need to inherit member from another another then we should use extends keyword.
+
+Interface can not inherit member from a class.
+
+
+class A1{}
+class B1 extends A1{}
+
+class A2 {}
+class B2 extends A2{}
+class C2 extends B2{}
+class D2 extends C2{}
+
+class A3{ }
+class B3{ }
+
+// class C3 extends A3, B3{}
+
+class A4{ }
+class B4 extends A4{ }
+class C4 extends A4{ }
+
+
+//class A5 extends A5{ }
+
+//class A6 extends B6 {}
+//class B6 extends A6 {}
+
+interface I1{}
+interface I2{}
+
+class A7 implements I1, I2 { }
+
+interface I3{}
+interface I4 extends I3{ }
+
+
+class A8 {}
+//interface I5 extends A8{}
+//interface I6 implements A8{}
+
+
+Has-A Relationship
+=================
+-> Object of existing class will be member of new class.
+-> Member of existing class will not be directly accessiable as member of new class.
+
+class Test{
+public static void main(String[] args){
+Address ref = new Address();
+System.out.println(ref.pin);
+
+Student stu = new Student();
+// System.out.println(stu.pin);
+System.out.println(stu.add);
+System.out.println(stu.add.pin);
+}
+}
+
+class Address{
+int pin = 560066;
+}
+
+class Student {
+ Address add;	// Has - A Relationship
+ Student (){
+  add = new Address();
+ }
+}
+
+
+Is-A Relationship
+=================
+-> Member of existing class will become member of new class.
+-> Member of existing class will be directly accessiable as member of new class.
+
+class Test{
+public static void main(String[] args){
+Person p = new Person();
+System.out.println(p.age);
+System.out.println(p.name);
+
+Student stu = new Student();
+System.out.println(stu.age);
+System.out.println(stu.name);
+
+}
+}
+
+class Person{
+ int age = 18;
+ String name ="Aadi";
+}
+
+class Student extends Person{
+}
+
+
+Inheritance with Variable and Methods:
+--------------------------------------
+class Test{
+public static void main(String[] args){
+Person p = new Person();
+p.age = 12;
+p.name = "Aadi";
+System.out.println(p.age);
+System.out.println(p.name);
+// System.out.println(p.sid);
+p.walk();
+// p.attendClass();
+
+Student stu = new Student();
+stu.age = 25;
+stu.name = "Rahul";
+stu.sid = "OITS-001";
+System.out.println(stu.age);
+System.out.println(stu.name);
+System.out.println(stu.sid);
+stu.walk();
+stu.attendClass();
+}
+}
+
+class Person{
+ int age;
+ String name;
+
+ void walk(){
+  System.out.println(name+" is Walking --");
+ }
+
+}
+
+class Student extends Person{
+  String sid;
+
+ void attendClass(){
+  System.out.println(name+" is Attending Class --");
+ }
+
+}
+
+
+Inheritance with Block & Constructor
+------------------------------------
+Loading the class
+-> Load the super class
+-> Load the sub class
+
+-> Object creation of sub class
+	Memory for all the instance variables will be allocted and initialized
+	Instance Block of  Super class
+	Constructor of  Super class
+	Instance Block of  Sub class
+	Constructor of  Sub class
+
+class Test{
+public static void main(String[] args){
+new OldStudent();
+new OldStudent();
+new Student();
+new Person();
+}
+}
+
+class Person{
+int age;
+static{
+System.out.println("-- Person S Block --");
+}
+{
+System.out.println("\n-- Person I Block --"+this);
+}
+Person(){
+System.out.println("-- Person() --"+this);
+}
+}
+
+class Student extends Person{
+static{
+System.out.println("-- Student S Block --");
+}
+{
+System.out.println("-- Student I Block --"+this);
+}
+Student(){
+System.out.println("-- Student() --"+this);
+}
+}
+
+class OldStudent extends Student{
+static{
+System.out.println("-- OldStudent S Block --");
+}
+{
+System.out.println("-- OldStudent I Block --"+this);
+}
+OldStudent(){
+System.out.println("-- OldStudent() --"+this);
+}
+}
+
+
+super keyword
+==============
+-> It is a Keyword
+-> Used to refer member of super direct class
+-> Can be used in the following ways
+	To access super class variables
+		super.<superClassVarName>
+
+	To access super class Methods
+		super.<superClassMethodName>
+
+	To access super class constructor
+		super(<arguments>);
+
+		-> Must be first statement
+		-> By default, Any constructor has call to default super constructr as first statement.
+			super();
+			
+
+class Test{
+public static void main(String[] args){
+
+Person p = new Person();
+p.age = 45;
+p.name = "Raj";
+System.out.println(p.age+"\t"+p.name);
+
+Student st = new Student();
+st.age = 12;
+st.name = "Aadi";
+st.sid  = "OITS-001";
+System.out.println(st.age+"\t"+st.name+"\t"+st.sid);
+}
+}
+
+class Person{
+ int age;
+ String name;
+  Person() {
+   super(); // Hidden
+   System.out.println("\n-- Person() --");
+  }
+}
+
+class Student extends Person{
+ String sid;
+  Student() {
+   super(); // Hidden
+   System.out.println("-- Student() --");
+  }
+
+}
+
+-----
+class Test{
+public static void main(String[] args){
+
+Person p = new Person(45, "Raj");
+System.out.println(p.age+"\t"+p.name);
+
+}
+}
+
+class Person{
+ int age;
+ String name;
+  Person(){
+   // super();
+   System.out.println("\n-- Person() --");
+  }
+  Person(int age, String name) {
+   // super();
+   System.out.println("\n-- Person(int,String) --");
+   this.age = age;
+   this.name = name;
+  }
+}
+
+class Student extends Person{
+ String sid;
+  Student() {
+   // super();
+   System.out.println("-- Student() --");
+  }
+
+}
+
+---
+class Test{
+public static void main(String[] args){
+
+Person p = new Person(45, "Raj");
+System.out.println(p.age+"\t"+p.name);
+
+}
+}
+
+class Person{
+ int age;
+ String name;
+  Person(int age, String name) {
+   System.out.println("\n-- Person(int,String) --");
+   this.age = age;
+   this.name = name;
+  }
+}
+
+class Student extends Person{
+ String sid;
+  Student() {
+   super(0, null);
+   System.out.println("-- Student() --");
+  }
+}
+-----
+class Test{
+public static void main(String[] args){
+
+Person p = new Person(45, "Raj");
+System.out.println(p.age+"\t"+p.name);
+
+Student st = new Student(12,"Aadi", "OITS-001");
+System.out.println(st.age+"\t"+st.name+"\t"+st.sid);
+}
+}
+
+class Person{
+ int age;
+ String name;
+  Person(int age, String name) {
+   System.out.println("\n-- Person(int,String) --");
+   this.age = age;
+   this.name = name;
+  }
+}
+
+class Student extends Person{
+ String sid;
+  Student(int age, String name, String sid) {
+super(age, name);
+this.sid = sid;
+   System.out.println("-- Student() --");
+  }
+
+}

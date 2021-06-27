@@ -1,0 +1,377 @@
+3) Unconditional Control Statement
+	break
+	continue
+
+a) break
+  To terminate the execution of switch/loop
+  must be used within the switch or looping block
+  It skip the execution of other statement defined in the same switch/loop block after the break
+ The Control will moved to outside the switch/loop.
+
+
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+// break;
+int x  = 10;
+if (x == 10){
+ // break;
+}
+System.out.println("Thanks");
+}
+}
+	
+
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+
+String msg ="WELCOME";
+
+switch(msg){
+ case "WELCOME":
+   System.out.println("Welcome Guys");
+   break;
+ case "HELLO":
+   System.out.println("Hello Guys");
+   break;
+}
+
+}
+}
+
+
+// Unreachable Error
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+
+for (int c = 1; c <= 10; c++){
+   System.out.println("Hello Guys "+c);
+   break;
+   System.out.println("Thanks Guys "+c);
+}
+
+final boolean b = true;
+while (true) {
+   System.out.println("Inside While");
+}
+System.out.println("Outside While");
+
+System.out.println("Thanks");
+}
+}	
+
+
+
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+for (int c = 1; c <= 10; c++){
+   System.out.println("Hello Guys "+c);
+   break;
+}
+System.out.println("Thanks");
+}
+}
+
+
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+
+for (int file = 1; file <= 10; file++){
+   System.out.println("Hello Guys "+file);
+   if (file %5 == 0){
+        System.out.println("Matching Found");
+		break;
+   }
+   System.out.println("Thanks Guys "+file);
+}
+
+System.out.println("Thanks");
+}
+}
+
+	
+
+b) continue
+  To continue the execution of loop with next iteration.
+
+  must be used within the looping block
+  It skip the execution of other statement defined in the same loop block after the continue
+ The Control will moved to 
+	updation part in the case of for block.
+	condition part in the case of while / do-while
+
+
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+// break;
+int x  = 10;
+if (x == 10){
+ // break;
+}
+System.out.println("Thanks");
+}
+}
+
+
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+
+for (int file = 1; file <= 10; file++){
+   System.out.println("Checking "+file);
+   if (file % 5 == 0){
+        System.out.println("Matching Found");
+		continue;
+   }
+   System.out.println("**Deleting "+file);
+}
+System.out.println("Thanks");
+}
+}
+
+
+
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+int file = 1;
+while(file <= 10){
+   System.out.println("Checking "+file);
+   if (file % 5 == 0){
+        System.out.println("Matching Found");
+		continue;
+   }
+   System.out.println("**Deleting "+file);
+   file++;
+}
+System.out.println("Thanks");
+}
+}
+
+
+
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+int file = 1;
+while(file <= 10){
+   System.out.println("Checking "+file);
+   if (file % 5 == 0){
+        file++;
+		System.out.println("Matching Found");
+		continue;
+   }
+   System.out.println("**Deleting "+file);
+	file++;
+}
+System.out.println("Thanks");
+}
+}
+
+
+Array
+=====
+ Data Structure -> Represent/ Structure data in the memory
+ Collection of data of same type. (Homogeneous Collection)
+ Array is object in java. Need to use new keyword to create array object.
+ Array variables are reference variable (Always 8 byte memory).
+
+class Test{
+static int [] var;
+public static void main(String args[]){
+System.out.println("Welcome");
+System.out.println(var);
+System.out.println("Thanks");
+}
+}
+
+  <dataType>[] <varName>; -> Array Reference Variable (8 byte memory)
+	new <dataType>[<size>];  Array Object
+  <varName>= new <dataType>[<size>];
+
+<dataType>[] <varName>= new <dataType>[<size>];
+
+-> dataType in both place must be same
+		int [] var = new byte[2]; // Invalid
+-> size must be 0 or positive int type
+		int [] var = new int[5L]; // Invalid
+-> -ve size will throw NegativeArraySizeException
+		int [] var = new int[-1];
+-> For each array in java, there is a built in member called length.
+-> length type will be int and it final. It is initialized with the size specified. It can not be changed.
+	int [] var = new int[5];
+	System.out.println(var.length);
+	var.length = 10; // Invalid
+-> Data will be stored and accessed using index notation.
+-> index will be of int type and will be in the range of 
+	index must be 0 or positive
+	index range is 0 to (length-1)
+
+class Test{
+
+public static void main(String args[]){
+System.out.println("Welcome");
+int [] var = new int[5];
+System.out.println(var.length);
+//var.length = 10;
+
+System.out.println(var[0]);
+System.out.println(var[1]);
+System.out.println(var[2]);
+System.out.println(var[3]);
+System.out.println(var[4]);
+
+var[0] = 100;
+var[1] = 101;
+var[2] = 102;
+var[3] = 103;
+var[4] = 104;
+
+System.out.println(var[0]);
+System.out.println(var[1]);
+System.out.println(var[2]);
+System.out.println(var[3]);
+System.out.println(var[4]);
+
+System.out.println("Thanks");
+}
+}
+
+-> When you try to use index which is not available then will throw ArrayIndexOutOfBoundsException
+	int [] var = new int[5];
+	var[-1] = 10;
+	
+	int [] var = new int[5];
+	var[5] = 10;
+
+-> When the reference is null and you try to access any member (index/length) you will get NullPointerException
+
+	int [] var = null;
+	var[5] = 10;
+	var[-1] = 10;
+	System.out.println(var.length);
+	
+
+class Test{
+
+public static void main(String args[]){
+System.out.println("Welcome");
+int [] var = new int[20];
+
+for(int index = 0; index <var.length ; index++){
+ System.out.println(var[index]);
+}
+
+for(int index = 0; index <var.length ; index++){
+ var[index] = 100 + index;
+}
+
+for(int index = 0; index <var.length ; index++){
+ System.out.println(var[index]);
+}
+
+System.out.println("Thanks");
+}
+}
+
+
+
+
+Normal For Loop:
+	You can use for normal iteration 
+	To store / to access the data
+	for(int i = 0; i< <arrayLength>; i++){
+	   <dataType> <varName> = <arrVarName>[i];
+        }
+
+	
+Enhanced For Statement/ For Each Statement:
+	Only to access the data of collection
+
+	for (<dataType> <varName> : <arrVarName>) {
+
+	}
+   
+ 
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+int [] var = new int[5];
+for(int i=0;i< var.length; i++){
+  var[i] = 1 + i;
+}
+for(int i=0;i< var.length; i++){
+   int x = var[i];
+   System.out.println(x +" - "+ (x * x));
+}
+for(int x : var){
+    System.out.println(x +" - "+ (x * x));
+}
+System.out.println("Thanks");
+}
+}
+
+
+class Test{
+public static void main(String args[]){
+System.out.println("Welcome");
+String str = "ABC";
+System.out.println(str.length());
+System.out.println(str.charAt(0));
+System.out.println(str.charAt(1));
+System.out.println(str.charAt(2));
+
+int[] var  = new int[4];
+System.out.println(var.length);
+System.out.println(var[0]);
+System.out.println(var[1]);
+System.out.println(var[2]);
+System.out.println(var[3]);
+
+System.out.println("Thanks");
+}
+}
+
+String (ABCDCBR)/ intValue (1234376)
+	Reverse
+	Polyndrome or now
+	First Occurance Position of a character in string / digits in intValue
+	Last Occurance Position of a character in string / digits in intValue
+	
+
+
+
+
+
+
+
+
+ 
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

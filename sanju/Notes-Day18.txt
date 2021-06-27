@@ -1,0 +1,273 @@
+Cloning / clone()
+-----------------
+to create copy for primitive values in java we can use assignment operator (=).
+
+public class Test{
+public static void main(String[] args){
+
+int x = 10;
+int y = x;	// Copying the value of x to y
+
+System.out.println(x);
+System.out.println(y);
+x = x + 5;
+System.out.println(x);
+System.out.println(y);
+y = y + 7;
+System.out.println(x);
+System.out.println(y);
+}
+}
+
+When we use assignment for reference then it assign the address of object. In this case, both reference variable points to same object.
+
+public class Test{
+public static void main(String[] args){
+
+Student st1 = new Student(56);
+int x = st1.hashCode();
+
+Student st2 = null; 
+System.out.println("ST1 "+st1+", ST2 "+st2);
+st1.sid = 45;
+System.out.println("ST1 "+st1+", ST2 "+st2);
+st2.sid = 98;
+System.out.println("ST1 "+st1+", ST2 "+st2);
+}
+}
+
+class Student{
+ int sid;
+ Student(int sid){
+   this.sid = sid;
+ }
+ public String toString() {
+  return "Sid "+this.sid;
+ }
+}
+
+To the clone the object we have clone() in Object class.
+clone() is protected in Object class.
+You can access protected member outside the package in the subclass as current subclass member.
+
+public class Test{
+public static void main(String[] args) throws Exception{
+
+Test test = new Test();
+test.clone();
+
+Student st1 = new Student(56);
+//st1.clone(); // Problem because of protected in Object class
+
+}
+}
+
+class Student{
+ int sid;
+ Student(int sid){
+   this.sid = sid;
+ }
+ 
+ void show() throws Exception{
+   clone();
+   this.clone();
+   super.clone();
+   Student st = new Student(56);
+   st.clone();
+ }
+ public String toString() {
+  return "Sid "+this.sid;
+ }
+}
+
+to invoke clone() method outside your class, first you need to override clone() in your class.
+
+When you override clone method in your class then 
+1) You can use default implementation of clone() defined in Object class using super.clone()
+
+2) You can have your own implementation of cloning the object.
+
+public class Test{
+public static void main(String[] args) throws Exception{
+Student st1 = new Student(56);
+st1.clone();
+}
+}
+
+class Student{
+ int sid;
+ Student(int sid){
+   this.sid = sid;
+ }
+ 
+public Object clone() throws CloneNotSupportedException{
+   return super.clone();
+ }
+ 
+ public String toString() {
+  return "Sid "+this.sid;
+ }
+}
+
+When you are using Object class clone() implementation then by default, any object is not eligible for cloning.
+
+If you try to clone, you will get exception at runtime called java.lang.CloneNotSupportedException.
+
+
+To make your object eligible for cloning, your class need to implement one Marker interface called java.lang.Cloneable.
+
+Marker interface: 
+Interface without abstract method.
+Interface without any member.
+
+public class Test{
+public static void main(String[] args) throws Exception{
+Student st1 = new Student(56);
+Object obj = st1.clone();
+Student st2 = (Student)obj;
+
+System.out.println(st1 == st2);
+
+System.out.println("ST1 "+st1+" , ST2 "+st2);
+
+st1.sid = 23;
+System.out.println("ST1 "+st1+" , ST2 "+st2);
+
+st2.sid = 65;
+System.out.println("ST1 "+st1+" , ST2 "+st2);
+}
+}
+
+class Student implements Cloneable{
+ int sid;
+ Student(int sid){
+   this.sid = sid;
+ }
+ 
+public Object clone() throws CloneNotSupportedException{
+   return super.clone();
+ }
+ 
+ public String toString() {
+  return "Sid "+this.sid;
+ }
+}
+
+
+Custom Implementation of clone() which does not requires you class to implement Cloneable  interface.
+
+public Object clone() throws CloneNotSupportedException{
+ return new Student(this.sid);
+}
+
+
+Custom Implementation of clone() which requires you class to implement Cloneable  interface.
+
+public Object clone() throws CloneNotSupportedException{
+   if (this instanceof Cloneable){
+     return new Student(this.sid);
+   }
+   throw new CloneNotSupportedException(this.getClass().getName());
+}
+
+
+Types Of Cloning:
+Shallow Cloning
+Deep Cloning
+
+public class Test{
+public static void main(String[] args) throws Exception{
+Address ad = new Address("ITPL", 560066);
+Student st1 = new Student(56,"Aadi", ad);
+Student st2 = st1.clone();
+
+System.out.println(st1 == st2);
+
+System.out.println("\nST1 "+st1+"\nST2 "+st2);
+
+st1.sid = 23;
+st1.name = "Rey";
+st1.address.street = "MKR";
+st1.address.pin = 560094;
+System.out.println("\nST1 "+st1+"\nST2 "+st2);
+
+st2.sid = 65;
+st2.name = "Rahul";
+st2.address.street = "RMV";
+st2.address.pin = 560023;
+System.out.println("\nST1 "+st1+"\nST2 "+st2);
+
+}
+}
+
+class Address {
+ String street;
+ int pin;
+ Address (String street, int pin) {
+   this.street = street;
+   this.pin = pin;
+ }
+
+  public String toString(){
+   return "Street "+street+", Pin "+pin;
+  }
+ 
+}
+
+
+class Student implements Cloneable{
+ int sid;
+ String name;
+ Address address;
+ 
+ Student(int sid, String name, Address address){
+   this.sid = sid;
+   this.name = name;
+   this.address = address;
+ }
+
+ public Student clone() throws CloneNotSupportedException{
+    return (Student)super.clone();
+ }
+  
+ public String toString() {
+  return "Sid "+sid+" , Name "+name+", "+address;
+ }
+}
+
+Shallow Cloning:
+	It clones only the first/main object.
+	Member objects will not be cloned.
+	Default implementation of Object class clone() method is for shallow cloning only.
+
+ 
+Default Implementation:
+ public Student clone() throws CloneNotSupportedException{
+    return (Student)super.clone();
+ }
+
+Custom Implementation:
+ public Student clone() throws CloneNotSupportedException{
+    if(this instanceof Cloneable){
+       return new Student(sid, name, address);
+    }
+   throw new CloneNotSupportedException(this.getClass().getName());
+ }
+
+
+Deep Cloning:
+	It clones the first/main object as well as the member objects.
+	There is no Default implementation for deep cloning.
+	You need to write custom implementation.
+
+ public Student clone() throws CloneNotSupportedException{
+    if(this instanceof Cloneable){
+       Address ad = new Address(address.street,address.pin);
+       return new Student(sid, name, ad);
+    }
+   throw new CloneNotSupportedException(this.getClass().getName());
+ }
+
+
+String class
+------------
